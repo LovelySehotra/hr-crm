@@ -1,0 +1,61 @@
+.sidebar {
+  width: 25%;
+  height: 100%;
+  background-color: var(background-color);
+  position: fixed;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  padding-inline-start: 1.5rem;
+  padding-block-start: 1.5rem;
+  border-inline-end: 1px solid var(--grey-color-200);
+  overflow-y: scroll;
+}
+nav{
+  padding-block: 1.5rem;
+}
+.sidebar::-webkit-scrollbar {
+  width: 0; 
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  display: none; 
+}
+
+.sidebarMenu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebarMenu ul {
+  text-decoration: none;
+  list-style: none;
+}
+
+.sidebarList {
+  padding: 0;
+}
+
+.sidebarList li {
+  text-align: start;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.5rem;
+  padding-block: 0.5rem;
+  margin-block: 0.5rem;
+
+}
+
+
+.sidebarList li a {
+  color: black;
+  text-decoration: none;
+}
+.sidebarList .active a {
+  color: var(--primary-100);
+}
+
+.sidebarList .active img {
+  filter: invert(26%) sepia(50%) saturate(5855%) hue-rotate(252deg) brightness(96%) contrast(93%);
+}
