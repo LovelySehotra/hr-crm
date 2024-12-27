@@ -1,0 +1,15 @@
+.heading{
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 27px;
+}
+.subText{
+  
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+
+}
+.caption{
+    color: var(--grey-color);
+}
