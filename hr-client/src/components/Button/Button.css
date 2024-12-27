@@ -1,0 +1,9 @@
+.button{
+    inline-size: 100%;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    color: var(--background-color);
+    font-size: medium;
+    font-weight: 500;
+}

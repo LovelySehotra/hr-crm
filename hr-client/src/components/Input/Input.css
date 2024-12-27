@@ -1,0 +1,15 @@
+.input{
+    inline-size: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--grey-color);
+    outline: transparent;
+    padding: 10px;
+    margin-block: 4px;
+    
+    
+}
+.labelClass{
+    font-size: 14px;
+    font-weight: 500;
+
+}

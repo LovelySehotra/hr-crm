@@ -1,13 +1,14 @@
 
 import './App.css'
+import { Button } from './components'
+import Input from './components/Input/Input'
 
 function App() {
-  
-
   return (
-    <div>
-      hello
-    </div>
+    <>
+      <Button>Login</Button>
+      <Input label id="emailInput" labelText="Email Address" placeholder="email@example.com"/>
+    </>
   )
 }
 
