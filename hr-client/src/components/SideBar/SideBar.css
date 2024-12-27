@@ -1,17 +1,27 @@
 .sidebar {
-  width: 25%;
-  height: 100%;
+  inline-size: 20%;
+  block-size: 100%;
   background-color: var(background-color);
   position: fixed;
   inset-inline-start: 0;
   inset-block-start: 0;
-  padding-inline-start: 1.5rem;
+  /* padding-inline-start: 1.5rem; */
   padding-block-start: 1.5rem;
   border-inline-end: 1px solid var(--grey-color-200);
   overflow-y: scroll;
 }
+.sidebarTop{
+  text-align: center;
+  inline-size: 90%;
+  margin-inline: auto;
+}
+.sideBarSearch{
+  margin-block-start: 1rem;
+
+}
 nav{
   padding-block: 1.5rem;
+  
 }
 .sidebar::-webkit-scrollbar {
   width: 0; 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from "../../assets/Logo.svg"
 import Candidate from "../../assets/SideBar/Candidates.svg"
 import Attendance from "../../assets/SideBar/Attendance.svg"
@@ -8,21 +8,29 @@ import Leaves from "../../assets/SideBar/Leaves.svg"
 import Employees from "../../assets/SideBar/Employees.svg"
 import './SideBar.css';
 import Typography from '../Typography/Typography';
+import {SearchBar} from "../../components"
 
 const Sidebar = () => {
-  const location = useLocation(); // Get current path
+  const location = useLocation(); 
+  const navigate = useNavigate();
   const [activePath, setActivePath] = useState(location.pathname);
   const handleClick = (path) => {
     setActivePath(path); 
-    console.log(activePath)
   };
-  // console.log(activePath)
+  const handleSearch = (value) => {
+    setActivePath(`/${value.toLowerCase()}`);
+    navigate(activePath);
+  };
+  
   return (
     <div className="sidebar">
 
 
-      <div className="sidebarLogo">
+      <div className="sidebarTop">
         <img src={Logo} alt="logo" />
+        <div className='sideBarSearch'>
+        <SearchBar placeholder="Search.."  onSearch={handleSearch}/>
+        </div>
       </div>
       <nav>
         <ul className='sidebarMenu'>

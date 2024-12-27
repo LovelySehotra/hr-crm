@@ -8,6 +8,7 @@
     outline: transparent;
     padding: 10px;
     margin-block: 4px;
+     box-sizing: border-box; 
     
     
 }

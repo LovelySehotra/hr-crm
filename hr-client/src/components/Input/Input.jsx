@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./Input.css"
-const Input = ({ label, labelText, id, type, value, onChange, placeholder, required }) => {
+const Input = ({ label, labelText, id, type, value, onChange, placeholder, required ,customCss}) => {
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -14,7 +14,7 @@ const Input = ({ label, labelText, id, type, value, onChange, placeholder, requi
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="input"
+                className={`input ${customCss}`}
                 required={required}
 
 
