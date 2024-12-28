@@ -1,0 +1,7 @@
+.loginButton{
+    margin-block: 0.5rem;
+}
+.registerLabel {
+    text-decoration: none;
+    color: var(--primary-200);
+}

@@ -1,8 +1,8 @@
 import React from 'react'
 import "./Button.css"
-const Button = ({ children, bgcolor }) => {
+const Button = ({ children, bgcolor,onSubmit }) => {
     return (
-        <button className='button' style={{ backgroundColor: bgcolor ? bgcolor : "var(--primary-100)" }}>
+        <button onSubmit={onSubmit} className='button' style={{ backgroundColor: bgcolor ? bgcolor : "var(--primary-100)" }}>
             {children}
         </button>
     )

@@ -23,3 +23,8 @@ export const getAllUsers = async (userId) => {
         res.status(200).json(users);
      
 }
+export const getUserById = async (id) => {
+    const user = await User.findById(id).select('-password');
+    if (!user) throw new AppError("User not found", 404);
+    return user;
+}

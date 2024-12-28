@@ -9,7 +9,7 @@ const Input = ({ label, labelText, id, type, value, onChange, placeholder, requi
         <div className='inputBox'>
             {label && <label htmlFor={id} className='labelClass'  >{labelText}</label>}
             <input
-
+                id={id}
                 type={type === 'password' && showPassword ? 'text' : type}
                 value={value}
                 onChange={onChange}
