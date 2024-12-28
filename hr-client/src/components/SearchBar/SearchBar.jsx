@@ -10,7 +10,7 @@ const SearchBar = ({ placeholder, onSearch }) => {
     };
 
     return (
-
+        
         <Input type="text" placeholder={placeholder} onChange={handleSearch} customCss="searchBar" />
         
     );
