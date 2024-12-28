@@ -1,4 +1,4 @@
-.loginPage {
+.registerPage {
     max-inline-size: 1280px;
     margin-inline: auto;
     min-block-size: 100vh;
@@ -6,19 +6,19 @@
     align-items: center;
    
 }
-.loginPageBorder {
+.registerPageBorder {
     display: grid;
     grid-template-columns: 40% 60%;
     border-radius: 15px;
     border: 1px solid var(--grey-color-200);
 }
 
-.loginPageLogo {
+.registerPageLogo {
     padding-inline: 1rem;
     padding-block-start: 1rem;
 }
 
-.loginPageSectionTwo {
+.registerPageSectionTwo {
     inline-size: 100%;
     border-radius: 0 15px 15px 0;
     display: grid;
@@ -27,10 +27,10 @@
 }
 
 @media screen and (width<=640px) {
-    .loginPageBorder {
+    .registerPageBorder {
         display: block;
     }
-    .loginPageSectionTwo {
+    .registerPageSectionTwo {
         display: none;
     }
 }

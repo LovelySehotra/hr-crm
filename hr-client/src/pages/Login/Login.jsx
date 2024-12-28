@@ -1,18 +1,20 @@
 import React from 'react'
-import LoginForm from '../../features/LoginForm/LoginForm'
+
 import Logo from "../../assets/Logo.svg"
+import "./Login.css"
+import { Carousel, LoginForm } from '../../features'
 
 const Login = () => {
     return (
-        <div>
-            <div>
-                <div>
-                <img src={Logo} alt="" />
+        <div className='loginPage'>
+            <div className='loginPageBorder'>
+                <div className='loginPageLogo'>
+                    <img src={Logo} alt="" />
+                <LoginForm/>
                 </div>
-                <LoginForm />
-            </div>
-            <div>
-
+                <div className='loginPageSectionTwo'>
+                    <Carousel/>
+                </div>
             </div>
         </div>
     )

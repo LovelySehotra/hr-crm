@@ -8,6 +8,8 @@ import Typography from './components/Typography/Typography'
 import LoginForm from './features/LoginForm/LoginForm'
 import RegisterForm from './features/RegisterForm/RegisterForm'
 import Login from './pages/Login/Login'
+import Carousel from './features/Carousel/Carousel'
+import Register from './pages/Register/Register'
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
     <div>
       <Routes>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<RegisterForm/>}/>
+        <Route path='/register' element={<Register/>}/>
       </Routes>
     </div>
 

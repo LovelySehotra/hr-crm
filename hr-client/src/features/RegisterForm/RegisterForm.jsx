@@ -73,7 +73,7 @@ const RegisterForm = () => {
                 {error && <div className="error">{error}</div>}
                 <div className='loginButton'>
 
-                    <Button onSubmit={handleSubmit}>Login</Button>
+                    <Button onSubmit={handleSubmit}>SignUp</Button>
                 </div>
             </form>
             <div>
