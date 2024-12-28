@@ -1,8 +1,6 @@
 import { Schema ,mongoose }  from "mongoose"
 import bcrypt from "bcrypt"
 
-
-
 const JobApplicationSchema = new Schema({
     status: { type: String, enum: ['New', 'Scheduleds', 'Selected', 'Ongoing', 'Rejected'], default: 'New' },
     experience: {
