@@ -9,5 +9,6 @@ export const {
     PORT,
     DATABASE_URL,
     JWT_SECRET,
-    DEFAULT_PASSWORD
+    DEFAULT_PASSWORD,
+    FRONTEND
 } = process.env

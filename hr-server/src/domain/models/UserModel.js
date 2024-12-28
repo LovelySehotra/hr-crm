@@ -11,7 +11,7 @@ const JobApplicationSchema = new Schema({
 });
 
 const UserSchema = new Schema({
-    name: { type: String, required: true },
+    fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: {
         type: String,
@@ -19,13 +19,14 @@ const UserSchema = new Schema({
     },
     phoneNumber: {
         type: String,
-        required: true
+        required: false
     },
     designation: { type: String, required: false },
     role: {
         type: String,
-        enum: ['Admin', 'HR', 'Employee'],
-        required: true
+        enum: [ 'hr', 'employee'],
+        default:'hr',
+        required: false
     },
 
     jobApplication: {
@@ -48,7 +49,7 @@ const UserSchema = new Schema({
     workingStatus: {
         type: String,
         enum: ['work from home', 'present', 'absent', 'medical leave'],
-        required: true
+        required: false
     }
 
 })
