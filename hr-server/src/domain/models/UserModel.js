@@ -1,4 +1,7 @@
-import { Schema } from "mongoose"
+import { Schema ,mongoose }  from "mongoose"
+import bcrypt from "bcrypt"
+
+
 
 const JobApplicationSchema = new Schema({
     status: { type: String, enum: ['New', 'Scheduleds', 'Selected', 'Ongoing', 'Rejected'], default: 'New' },
@@ -51,5 +54,17 @@ const UserSchema = new Schema({
     }
 
 })
-
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+      return next();
+    }
+  
+    try {
+      this.password = await bcrypt.hash(this.password, 10);
+      next();
+    } catch (error) {
+      return next(error);
+    }
+  });
+  
 export const User = mongoose.model('User', UserSchema);

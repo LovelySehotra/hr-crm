@@ -1,5 +1,6 @@
 import express from "express";
 import errorHandler from "../interface/middleware/error.middleware.js";
+import { appRouter } from "../interface/routers/index.js";
 
 
 export class Server {
@@ -10,7 +11,7 @@ export class Server {
         this.app.get("/ping", (req,res)=>{
             return res.status(200).json({message:"pong@@"})
         });
-        // this.app.use("/api", appRouter);
+        this.app.use("/api", appRouter);
         this.app.use(errorHandler);
     
     }
