@@ -1,7 +1,7 @@
 import React from "react";
 import "./SelectOption.css";
 
-const SelectOption = ({ options, value, onChange, label }) => {
+const SelectOption = ({ options, value, onChange }) => {
   return (
     <div className="selectContainer">
       <select className="selectDropdown" value={value} onChange={(e) => onChange(e.target.value)}>

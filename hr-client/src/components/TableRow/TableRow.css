@@ -17,9 +17,9 @@ td {
     border-radius: 50%;
 
 }
-.resume a{
+.resume a:first-child{
     text-decoration: none;
-    padding-inline: 10px;
+    margin-inline-end: 1.5rem;
 }
 
 td select {

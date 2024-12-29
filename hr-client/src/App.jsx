@@ -17,6 +17,8 @@ import SelectOption from './components/SelectOption/SelectOption'
 import TableRow from './components/TableRow/TableRow'
 import TableHeading from './components/TableHeading/TableHeading'
 import Table from './features/Table/Table'
+import DashboardTopBar from './components/DashboardTopBar/DashboardTopBar'
+import Candidates from './pages/Candidates/Candidates'
 
 function App() {
  
@@ -25,12 +27,13 @@ function App() {
   return (
     <>
       <div>
-        {/* <Routes>
+        <Routes>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
-      </Routes> */}
+        <Route path='/candidate' element={<Candidates/>}/>
+      </Routes>
       </div>
-      <Table/>
+     
       
     </>
   )

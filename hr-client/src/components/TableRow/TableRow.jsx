@@ -1,5 +1,6 @@
 import React from "react";
 import DownloadImg from "../../assets/Download.svg"
+import DeleteIcon from "../../assets/Delete.svg"
 import "./TableRow.css";
 
 const TableRow = ({ type, row, onStatusChange }) => {
@@ -36,7 +37,7 @@ const TableRow = ({ type, row, onStatusChange }) => {
                     <img src={DownloadImg} alt="" />
                 </a>
                 <a href={row.Resume} target="_blank"  rel="noopener noreferrer">
-                    <img src={DownloadImg} alt="" />
+                    <img src={DeleteIcon} alt="" />
                 </a>
             </td> : ''
             }

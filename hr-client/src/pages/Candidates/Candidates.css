@@ -1,0 +1,14 @@
+.candidatesBox{
+    padding-inline: 1rem;
+}
+.candidatefilterOption{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block: 0.8rem;
+}
+.candidatefilterOption div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

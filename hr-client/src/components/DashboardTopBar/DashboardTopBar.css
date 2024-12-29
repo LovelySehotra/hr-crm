@@ -1,0 +1,15 @@
+.topBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 1rem;
+    border-bottom: 1px solid var(--grey-color-200);
+    font-size: 16px;
+    font-weight: 500;
+}
+.topBarButton{
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+}
