@@ -1,0 +1,14 @@
+
+thead {
+  color: var(--background-color);
+  background-color: var(--primary-100);
+  border-bottom: 1px solid #ddd; /* Add a border at the bottom for separation */
+}
+
+th {
+  padding: 8px 8px; 
+  background-color: var(--primary-100); 
+  text-align: start;
+}
+  
+  

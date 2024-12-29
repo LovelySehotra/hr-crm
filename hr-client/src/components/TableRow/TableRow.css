@@ -1,11 +1,10 @@
+
 td {
     font-size: 12px;
     font-weight: 500;
     line-height: 19px;
-    /* border: 1px solid #ddd; */
     vertical-align: middle;
-    padding-inline: 10px;
-    /* background-color: antiquewhite; */
+    padding-inline: 8px;
 }
 
 .tableColorBox p {
@@ -21,14 +20,6 @@ td {
 .resume a{
     text-decoration: none;
     padding-inline: 10px;
-
-    /* inline-size: 100%; */
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: end;
-    justify-content: space-between;
-    gap: 10px; */
-    /* background-color: #007bff; */
 }
 
 td select {
@@ -42,7 +33,6 @@ td select {
 }
 
 td a {
-    /* color: #007bff; */
     text-decoration: none;
     font-weight: bold;
 }
@@ -52,15 +42,6 @@ td a:hover {
 }
 
 @media (max-width: 768px) {
-    table {
-        font-size: 10px;
-    }
-
-    td {
-        /* padding: 8px; */
-    }
-
-    td select {
-        /* font-size: 12px; */
-    }
+    
+   
 }
