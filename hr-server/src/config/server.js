@@ -13,12 +13,6 @@ export class Server {
         this.app.use(express.json());
         this.app.use(cors({
             origin: [FRONTEND],
-            methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-            allowedHeaders: ["Origin",
-                "X-Requested-With",
-                "Content-Type",
-                "Accept",
-                "Authorization",],
             credentials: true
 
         }));
