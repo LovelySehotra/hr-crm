@@ -15,7 +15,7 @@ export const createUserByAdmin = async (userId, userData) => {
     password: DEFAULT_PASSWORD,
     department: department,
     jobApplication: jobApplication,
-    role: "employee"
+    role: "temp"
   })
   if (!newUser) throw new AppError("Failed to create User", 404)
   return newUser;

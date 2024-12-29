@@ -15,9 +15,9 @@ const Candidates = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [resume, setResume] = useState(null);
-  const [department,setDepartment ] = useState("");
+  const [department, setDepartment] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [experience,setExperience] = useState('');
+  const [experience, setExperience] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,26 +25,29 @@ const Candidates = () => {
   const { status } = useSelector((state) => state?.candidateManage);
 
   const selectOptions = [{ value: "all", label: "All" }];
-  const headings =["","Name","Email Address","Phone Number","Position","Status","Experience","Resume"
+  const headings = ["", "Name", "Email Address", "Phone Number", "Department", "Status", "Experience", "Resume"
 
   ]
-  const getAll = async () => {
-    const response = await dispatch(getAllCandidates()).unwrap();
-    setRows(response);
-  };
+ 
 
   const openDialog = () => {
     setIsDialogOpen(true);
   };
 
   const closeDialog = () => {
-    setIsDialogOpen(false);
+    setIsDialogOpen(response);
   };
+  const handleStatusUpdate=(userId,value)=>{
+    console.log(userId)
 
-  useEffect(() => {
-    getAll();
-  }, [dispatch]);
-
+  }
+  const handleDeleteUser = (userId)=>{
+    console.log(userId)
+  }
+  const handleGetAllUser = async () => {
+    const response = await dispatch(getAllCandidates()).unwrap();
+    setRows(response);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -57,8 +60,18 @@ const Candidates = () => {
       setError("Check the condition");
       return;
     }
+    const formData = {
+      fullName,
+      email,
+      phoneNumber,
+      jobApplication: {
+        experience,
+        resumeLink: "https://pdfobject.com/pdf/sample.pdf",
+        status: "new"
+      }
+    }
     try {
-      const response = await dispatch(createUserByAdmin({ fullName, email, phone, resume }));
+      const response = await dispatch(createUserByAdmin(formData));
       if (response) {
         setLoading(false);
         setIsDialogOpen(false);
@@ -71,7 +84,9 @@ const Candidates = () => {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    handleGetAllUser();
+  }, [dispatch]);
   return (
     <Sidebar>
       <div>
@@ -88,7 +103,7 @@ const Candidates = () => {
             </div>
           </div>
           {status === 'succeeded' ? (
-            <Table headings={headings} rows={rows} />
+            <Table type='candidatePage' headings={headings} rows={rows} handleStatus={handleStatusUpdate} handleDeleteUser={handleDeleteUser} />
           ) : (
             rows.length ? <h1>No Data found</h1> : <h1>Loading...</h1>
           )}
@@ -129,7 +144,7 @@ const Candidates = () => {
                   placeholder="Enter your phone number"
                   required
                 />
-                 <InputOutline
+                <InputOutline
                   label
                   labelText="Department"
                   id="department"
@@ -139,7 +154,7 @@ const Candidates = () => {
                   placeholder="Enter your department"
                   required
                 />
-                 <InputOutline
+                <InputOutline
                   label
                   labelText="Experience"
                   id="experience"

@@ -2,7 +2,7 @@ import { Schema ,mongoose }  from "mongoose"
 import bcrypt from "bcrypt"
 
 const JobApplicationSchema = new Schema({
-    status: { type: String, enum: ['new', 'scheduleds', 'selected', 'sngoing', 'rejected'], default: 'new' },
+    status: { type: String, enum: ['new', 'scheduleds', 'selected', 'ongoing', 'rejected'], default: 'new' },
     experience: {
         type: String,
         required: false
@@ -24,7 +24,7 @@ const UserSchema = new Schema({
     designation: { type: String, required: false },
     role: {
         type: String,
-        enum: [ 'admin', 'employee'],
+        enum: [ 'admin', 'employee',"temp"],
         default:'admin',
         required: false
     },

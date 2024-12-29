@@ -27,7 +27,9 @@ const Sidebar = ({children}) => {
       {/* Sidebar Section */}
       <div className="sidebar">
         <div className="sidebarTop">
+          <Link to="/candidate">
           <img src={Logo} alt="logo" />
+          </Link>
           <div className='sideBarSearch'>
             <SearchBar placeholder="Search.." onSearch={handleSearch}/>
           </div>
