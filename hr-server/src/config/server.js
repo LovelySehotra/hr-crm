@@ -4,6 +4,7 @@ import { appRouter } from "../interface/routers/index.js";
 import cors from "cors"
 import { FRONTEND} from "../config/index.js"
 import { connectionToDB } from "../infrastructure/db.config.js";
+import { userDeserializer } from "../interface/middleware/userDeserialiser.js";
 
 export class Server {
     constructor(config) {
@@ -21,6 +22,7 @@ export class Server {
             credentials: true
 
         }));
+        this.app.use(userDeserializer)
         this.app.get("/ping", (req, res) => {
             return res.status(200).json({ message: "pong@@" })
         });

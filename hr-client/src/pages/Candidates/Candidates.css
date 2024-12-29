@@ -12,3 +12,22 @@
     align-items: center;
     gap: 10px;
 }
+.dialogBoxChildren{
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    text-align: center;
+}
+.formBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.candidatesSaveButton{
+    background-color: var(--grey-color);
+    padding-block: 0.5rem;
+    padding-inline: 2.5rem;
+    border: none;
+    border-radius: 15px;
+    color: var(--background-color);
+    cursor: pointer;
+}

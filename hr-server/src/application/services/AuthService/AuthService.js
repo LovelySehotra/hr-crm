@@ -20,6 +20,6 @@ export const login = async (loginCredentials) => {
         throw new AppError("Invalid Credentails", 400)
     const accessToken = await createAccessToken(user._id);
     const refreshToken = await createRefreshToken(user._id)
-    newUser.password = undefined
+    user.password = undefined
     return { user, accessToken, refreshToken };
 }

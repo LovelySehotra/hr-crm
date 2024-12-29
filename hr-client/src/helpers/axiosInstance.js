@@ -6,14 +6,16 @@ export const axiosInstance = axios.create();
 
 axiosInstance.defaults.baseURL = BASE_URL;
 axiosInstance.defaults.withCredentials = true
-// axiosInstance.interceptors.request.use(
-//     (config) => {
-//       const state = store.getState(); // Access the Redux store state
-//       const token = state.auth.token; // Get the token from the auth slice
-//       if (token) {
-//         config.headers.Authorization = `Bearer ${token}`; // Set the Bearer token
-//       }
-//       return config;
-//     },
-//     (error) => Promise.reject(error)
-//   );
+export const setupInterceptors = (store) => {
+  axiosInstance.interceptors.request.use(
+    (config) => {
+      const state = store.getState(); 
+      const token = state.auth?.userInfo?.accessToken; 
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`; // Attach Bearer token
+      }
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
+};

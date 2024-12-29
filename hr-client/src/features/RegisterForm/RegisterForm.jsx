@@ -1,39 +1,63 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, Input } from '../../components';
 import Typography from '../../components/Typography/Typography';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/slices/AuthSlice';
+import { emailRegex, passwordRegex } from '../../helpers/regex';
+import "./RegisterForm.css"
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { error: reduxError } = useSelector((state) => state.auth);
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassoword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!email || !password) {
             setError('Please fill in both fields');
             return;
         }
+        if (password !== confirmPassword) {
+            setError('Password and confirm password is not same');
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            setError('Email is invalid');
+            return
+        }
 
+        if (!passwordRegex.test(password)) {
+            setError('password must be 8+ chars, include upper/lower, number, and special char"');
+            return
+        }
         setError('');
-        const response = dispatch(register({ email, password,fullName }))
-        console.log(response)
-        // response && navigate("/candidate")
-
+        try {
+            const response = await dispatch(register({ email, password, fullName })).unwrap();
+            response && navigate("/candidate")
+        } catch (error) {
+            console.log(error)
+            setError(error);
+        }
+       
     };
+    useEffect(() => {
+        if (reduxError) {
+            setError(reduxError);
+        }
+    }, [reduxError]);
 
     return (
-        <div className="login-form-container">
+        <div >
             <Typography>Welcome to Dashboard</Typography>
-            <form onSubmit={handleSubmit} className="login-form">
+            <form onSubmit={handleSubmit}>
                 <Input
                     label
                     type="text"
@@ -74,7 +98,7 @@ const RegisterForm = () => {
                 />
 
                 {error && <div className="error">{error}</div>}
-                <div className='loginButton'>
+                <div className='registerButton'>
 
                     <Button onSubmit={handleSubmit}>SignUp</Button>
                 </div>

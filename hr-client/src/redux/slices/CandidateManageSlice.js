@@ -1,61 +1,58 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helpers/axiosInstance";
 const getUserInfoFromStorage = () => {
-    const userInfo = localStorage.getItem('userInfo'); 
-    return userInfo && userInfo !== "undefined" ? JSON.parse(userInfo) : null;
+    const candidateInfo = localStorage.getItem('candidateInfo');
+    return candidateInfo && candidateInfo !== "undefined" ? JSON.parse(candidateInfo) : null;
 };
 const initialState = {
-    userInfo: getUserInfoFromStorage(),
+    candidateInfo: getUserInfoFromStorage(),
     status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
 }
-const authSlice = createSlice({
-    name: 'auth',
+const candidateManageSlice = createSlice({
+    name: 'candidateManage',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
 
         builder
-            .addCase(register.pending, (state) => {
+            .addCase(getAllCandidates.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(getAllCandidates.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.userInfo = action.payload;
-                localStorage.setItem('userInfo', JSON.stringify(action.payload)); // Save to localStorage
+                localStorage.setItem('candidateInfo', JSON.stringify(action.payload)); 
             })
-            .addCase(register.rejected, (state, action) => {
+            .addCase(createUserByAdmin.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })
-            .addCase(login.pending, (state) => {
+            .addCase(createUserByAdmin.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(login.fulfilled, (state, action) => {
+            .addCase(createUserByAdmin.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.userInfo = action.payload;
                 localStorage.setItem('userInfo', JSON.stringify(action.payload)); // Save to localStorage
-            })
-            .addCase(login.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.payload;
             });
+          
     }
 })
-export const register = createAsyncThunk("auth/register", async (data, { rejectWithValue }) => {
+export const getAllCandidates = createAsyncThunk("candidate/getAll", async (data, { rejectWithValue }) => {
     try {
-        const res = await axiosInstance.post("/users/register", data);
+        const res = await axiosInstance.get("/users/candidate", data);
         return res.data;
     } catch (error) {
         console.log(error)
-        return rejectWithValue(error.response?.data?.message || "Register failed");
+        return rejectWithValue(error.response?.data?.message || "Login failed");
     }
 })
-export const login = createAsyncThunk("auth/login", async (data, { rejectWithValue }) => {
+export const createUserByAdmin = createAsyncThunk("candidate/create",async(data,{rejectWithValue})=>{
     try {
-        const res = await axiosInstance.post("/users/login", data);
+        const res = await axiosInstance.post("/users/candidate", data);
         console.log(res.data)
         return res.data;
     } catch (error) {
@@ -63,4 +60,4 @@ export const login = createAsyncThunk("auth/login", async (data, { rejectWithVal
         return rejectWithValue(error.response?.data?.message || "Login failed");
     }
 })
-export default authSlice.reducer;
+export default candidateManageSlice.reducer;

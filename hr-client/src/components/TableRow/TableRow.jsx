@@ -4,24 +4,26 @@ import DeleteIcon from "../../assets/Delete.svg"
 import "./TableRow.css";
 
 const TableRow = ({ type, row, onStatusChange }) => {
+    const {fullName,email,phoneNumber,department,jobApplication:{experience,status,resumeLink}} = row;
     const colorScheme = {
         scheduled: "orange",
         selected: "blue",
         ongoing: "green",
         pending: "gray",
         rejected: "red",
+        new: "black"
     };
-
+    console.log(fullName,email,phoneNumber,department,status,experience)
     return (
-        <tr style={{ color: colorScheme[row.jobApplication.status.toLowerCase()] || "white" }}>
-            <td className={`tableColorBox  ${row.jobApplication.status.toLowerCase() == 'scheduled' ? "circle" : ""}`}><p style={{ backgroundColor: colorScheme[row.jobApplication.status.toLowerCase()] || "white" }}></p></td>
-            <td>{row.fullName}</td>
-            <td>{row.email}</td>
-            <td>{row.phoneNumber}</td>
-            <td>{row.Position}</td>
+        <tr style={{ color: colorScheme[status.toLowerCase()] || "black" }}>
+            <td className={`tableColorBox  ${status.toLowerCase() == 'scheduled' ? "circle" : ""}`}><p style={{ backgroundColor: colorScheme[status.toLowerCase()] || "white" }}></p></td>
+            <td>{fullName}</td>
+            <td>{email}</td>
+            <td>{phoneNumber}</td>
+            <td>{department}</td>
             <td>
-                <select  style={{ color: colorScheme[row.jobApplication.status.toLowerCase()] || "white" }}
-                    value={row.jobApplication.status}
+                <select style={{ color: colorScheme[status.toLowerCase()] || "yellow" }}
+                    value={status?.toLowerCase() ||"Pending"}
                     onChange={(e) => onStatusChange(row.id, e.target.value)}
                 >
                     <option value="Selected">Selected</option>
@@ -29,17 +31,17 @@ const TableRow = ({ type, row, onStatusChange }) => {
                     <option value="Rejected">Rejected</option>
                 </select>
             </td>
-            <td>{row.Experience}</td>
+            <td>{experience}</td>
             {
                 type === "candidatePage" ?
-                <td className="resume">
-                <a href={row.Resume} target="_blank"  rel="noopener noreferrer">
-                    <img src={DownloadImg} alt="" />
-                </a>
-                <a href={row.Resume} target="_blank"  rel="noopener noreferrer">
-                    <img src={DeleteIcon} alt="" />
-                </a>
-            </td> : ''
+                    <td className="resume">
+                        <a href={resumeLink} target="_blank" rel="noopener noreferrer">
+                            <img src={DownloadImg} alt="" />
+                        </a>
+                        <a href={row.Resume} target="_blank" rel="noopener noreferrer">
+                            <img src={DeleteIcon} alt="" />
+                        </a>
+                    </td> : ''
             }
         </tr>
     );

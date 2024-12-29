@@ -23,7 +23,7 @@ const LoginForm = ({ }) => {
         setError('');
         try {
             const response = await dispatch(login({ email, password })).unwrap();
-
+            
             if (response) {
                 navigate('/candidate');
             }

@@ -1,8 +1,10 @@
 import { DEFAULT_PASSWORD } from "../../../config/index.js";
 import { User } from "../../../domain/models/UserModel.js";
-import AppError from "../../../interface/utils/AppError";
+import AppError from "../../../interface/utils/AppError.js";
 
-export const createUserByAdmin = async (userData) => {
+export const createUserByAdmin = async (userId, userData) => {
+  const admin = await User.findById({_id:userId});
+  if(!admin) throw new AppError("Access denied",404)
   const { fullName, email, phoneNumber, department, jobApplication } = userData;
   const userExists = await User.findOne({ email });
   if (userExists) throw new AppError("User already exist", 400)
@@ -21,14 +23,14 @@ export const createUserByAdmin = async (userData) => {
 export const getAllUsers = async (userId) => {
   const currentUserId = userId;
   const users = await User.find({
-    role: { $in: ['employee'] },
+    role: { $nin: ['admin', 'hr'] },
     _id: { $ne: currentUserId }
   })
     .select('-password');
   if (!users.length) {
     throw new AppError("No User found", 404)
   }
-  res.status(200).json(users);
+  return users;
 
 }
 export const getUserById = async (id) => {

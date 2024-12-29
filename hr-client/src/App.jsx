@@ -8,6 +8,7 @@ import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import { Sidebar } from './components'
 
+
 function App() {
 
 
@@ -31,6 +32,7 @@ function App() {
           } />
           <Route path='/employee' element={<Employees />} />
         </Routes>
+        {/* <Form/> */}
       </div>
 
 
