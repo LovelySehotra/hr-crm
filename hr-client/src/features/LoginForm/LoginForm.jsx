@@ -1,28 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
 import { Button, Input } from '../../components';
 import Typography from '../../components/Typography/Typography';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../redux/slices/AuthSlice';
 
 const LoginForm = ({ }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const { error: reduxError } = useSelector((state) => state.auth);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-
         if (!email || !password) {
             setError('Please fill in both fields');
             return;
         }
-
         setError('');
+        try {
+            const response = await dispatch(login({ email, password })).unwrap();
 
-        const loginData = { email, password };
-        console.log('Logging in with:', loginData);
+            if (response) {
+                navigate('/candidate');
+            }
+        } catch (error) {
+            console.log(error)
+            setError(error);
+        }
     };
+    useEffect(() => {
+        if (reduxError) {
+            setError(reduxError);
+        }
+    }, [reduxError]);
 
     return (
         <div className="login-form-container">

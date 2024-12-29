@@ -5,3 +5,7 @@
     text-decoration: none;
     color: var(--primary-200);
 }
+.error{
+    color: var(--danger-100);
+    font-size: 10px;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from "../../assets/Logo.svg";
-import Candidate from "../../assets/SideBar/Candidates.svg";
+import Candidate from "../../assets/SideBar/Candidate.svg";
 import Attendance from "../../assets/SideBar/Attendance.svg";
 import Lagout from "../../assets/SideBar/Lagout.svg";
 import Leaves from "../../assets/SideBar/Leaves.svg";

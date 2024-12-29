@@ -6,4 +6,5 @@
     color: var(--background-color);
     font-size: medium;
     font-weight: 500;
+    cursor: pointer;
 }
