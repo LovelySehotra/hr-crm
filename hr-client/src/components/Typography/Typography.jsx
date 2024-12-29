@@ -4,7 +4,7 @@ const Typography = ({type,children}) => {
     const renderMessage = () => {
         switch (type) {
           case 'subHeading':
-            return <p style={{ color: 'red' }}>{children}</p>;
+            return <p style={{ color: 'var(--background-color)' }}>{children}</p>;
           case 'subText':
             return <p className='subText' >{children}</p>;
             case 'caption':

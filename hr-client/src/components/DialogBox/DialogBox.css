@@ -1,0 +1,51 @@
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+}
+.dialog-overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+.dialog {
+    padding: 0;
+    border-radius: 8px;
+    width: 100%;
+    position: relative;
+    border: none;
+}
+.dialogBoxLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-100);
+    padding-block: 1rem;
+    border-radius: 8px 8px 0 0;
+}
+.dialogBoxLabel p {
+    inline-size: 100%;
+    text-align: center;
+    margin: 0;
+    font-size: 20px;
+    font-weight:500;
+}
+.dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+.dialogBoxContent{
+   
+}

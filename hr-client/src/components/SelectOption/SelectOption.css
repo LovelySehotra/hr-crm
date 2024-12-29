@@ -1,0 +1,25 @@
+.selectDropdown {
+  min-inline-size: 150px;
+  padding-inline: 15px;
+  padding-block: 8px;
+  font-size: 16px;
+  border: 1px solid var(--primary-100);
+  border-radius: 20px;
+  background-color: var(--background-color);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url(../../assets/DownArrow.svg);
+  background-position: calc(100% - 10px) calc(1em - 2px), calc(100% - 5px) calc(1em + 2px);
+  background-size: 15px 10px, 10px 10px;
+  background-repeat: no-repeat;
+}
+
+.selectDropdown:focus {
+  outline: none;
+  border-color: var(--primary-200);
+}
+
+.selectDropdown option {
+  padding: 10px;
+}
