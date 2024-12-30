@@ -1,5 +1,5 @@
 // import { ENV } from "@/config";
-let allowedOrigins = ["https://hrcrm.vercel.app"]
+let allowedOrigins = ["https://hrcrm.vercel.app","http://localhost:5174"]
 export const corsConfig = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {

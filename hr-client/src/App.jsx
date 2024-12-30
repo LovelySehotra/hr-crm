@@ -7,6 +7,7 @@ import ProtectedRoute from './helpers/protectedRoute'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import { Sidebar } from './components'
+import Attendances from './pages/Attendances/Attendances'
 
 
 function App() {
@@ -19,10 +20,10 @@ function App() {
         <Routes>
           <Route path='/*' element={
             <ProtectedRoute>
-            <Sidebar />
+              <Sidebar />
             </ProtectedRoute>
-            
-            } />
+
+          } />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/candidate' element={
@@ -30,7 +31,14 @@ function App() {
               <Candidates />
             </ProtectedRoute>
           } />
-          <Route path='/employee' element={<Employees />} />
+          <Route path='/employee' element={
+            <ProtectedRoute>
+            <Employees />
+          </ProtectedRoute>} />
+          <Route path='/attendance' element={
+            <ProtectedRoute>
+           <Attendances/>
+          </ProtectedRoute>} />
         </Routes>
         {/* <Form/> */}
       </div>

@@ -9,7 +9,7 @@ const Employees = () => {
     const dispatch = useDispatch();
     const [rows, setRows] = useState([]);
     const selectOptions=[ { value: "all", label: "All" },]
-    const headings =["","Profile","Name","Email Address","Phone Number","Department","Position","Date of Joining"
+    const headings =["","Profile","Name","Email Address","Phone Number","Position","Department","Date of Joining"
 
     ]
     const getAll = async () => {

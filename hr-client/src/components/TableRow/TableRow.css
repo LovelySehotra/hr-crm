@@ -17,9 +17,8 @@ td {
     border-radius: 50%;
 
 }
-.resume a:first-child{
+.resume {
     text-decoration: none;
-    margin-inline-end: 1.5rem;
 }
 
 td select {
@@ -42,6 +41,12 @@ td a:hover {
     text-decoration: underline;
 }
 
+.deleteButton{
+    background-color: transparent;
+    border: none;
+    inline-size: max-content;
+    cursor: pointer;
+}
 @media (max-width: 768px) {
     
    

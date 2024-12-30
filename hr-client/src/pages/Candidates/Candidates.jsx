@@ -25,7 +25,7 @@ const Candidates = () => {
   const { status } = useSelector((state) => state?.candidateManage);
 
   const selectOptions = [{ value: "all", label: "All" }];
-  const headings = ["", "Name", "Email Address", "Phone Number", "Department", "Status", "Experience", "Resume"
+  const headings = ["", "Name", "Email Address", "Phone Number", "Position","Experience", "Status", ,"Resume",""
 
   ]
  

@@ -1,5 +1,6 @@
 import { JWT_SECRET } from "../../../config/index.js";
 import jwt from "jsonwebtoken";
+import AppError from "../../../interface/utils/AppError.js";
 
 
 export const createAccessToken = async (userId) => {
@@ -23,5 +24,6 @@ export const exchangeRefreshTokenForAccess = async (refreshToken) => {
 
 export const decodeToken = async (token) => {
     const decoded = jwt.verify(token, JWT_SECRET)
+    if(!decoded) throw new AppError("User token is invalid",401)
     return decoded;
 }

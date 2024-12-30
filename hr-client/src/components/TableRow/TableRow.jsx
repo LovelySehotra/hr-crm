@@ -1,63 +1,107 @@
-import React, { useState } from "react";
-import DownloadImg from "../../assets/Download.svg"
-import DeleteIcon from "../../assets/Delete.svg"
-import Profile from "../../assets/TopBar/Profile.png"
+import React from "react";
+import DownloadImg from "../../assets/Download.svg";
+import DeleteIcon from "../../assets/Delete.svg";
+import Profile from "../../assets/TopBar/Profile.png";
 import "./TableRow.css";
 
-const TableRow = ({ type, row, handleStatus,handleDeleteUser }) => {
-    const { _id: userId, fullName, email, phoneNumber,designation, department, jobApplication: { experience, status, resumeLink }, joiningDate, workingStatus, todayTask, position } = row;
+const TableRow = ({ type, row, handleStatus, handleDeleteUser }) => {
+    const {
+        _id: userId,
+        fullName,
+        email,
+        phoneNumber,
+        designation,
+        department,
+        jobApplication: { experience, status, resumeLink } = {},
+        joiningDate,
+        workingStatus,
+        todayTask,
+    } = row;
+
     const colorScheme = {
         scheduled: "orange",
         selected: "blue",
         ongoing: "green",
         pending: "gray",
         rejected: "red",
-        new: "black"
+        new: "black",
     };
-    // console.log(fullName, email, phoneNumber, department, status, experience)
+
+    const statusColor = colorScheme[status?.toLowerCase()] || "black";
+
+    const options =
+        type === "candidatePage"
+            ? ["Selected", "Rejected", "Ongoing", "New", "Scheduled"]
+            : ["Absent", "Present", "Working from home", "Medical Leave"];
     return (
-        <tr style={{ color: colorScheme[status.toLowerCase()] || "black" }}>
-            <td className={`tableColorBox  ${status.toLowerCase() == 'scheduled' ? "circle" : ""}`}><p style={{ backgroundColor: colorScheme[status.toLowerCase()] || "white" }}></p></td>
-            {type === "employeePage" && <td><img src={Profile} alt="" /></td>}
+        <tr style={{ color: statusColor }}>
+            <td
+                className={`tableColorBox ${status?.toLowerCase() === "scheduled" ? "circle" : ""}`}
+            >
+                <p style={{ backgroundColor: statusColor }}></p>
+            </td>
+
+            {type === "employeePage" && (
+                <td>
+                    <img src={Profile} alt="Profile" />
+                </td>
+            )}
+
             <td>{fullName}</td>
             <td>{email}</td>
-            <td>{phoneNumber}</td>
-            <td>{department}</td>
-            {
-                type !== "employeePage" && (
-                    <td>
-                        <select
-                            style={{ color: colorScheme[status?.toLowerCase()] || "yellow" }}
-                            value={status.toLowerCase()} // Ensure correct default value
-                            onChange={(e) => handleStatus(userId, e.target.value)}
-                        >
-                            <option value="selected">Selected</option>
-                            <option value="pending">Pending</option>
-                            <option value="rejected">Rejected</option>
-                            <option value="new">New</option>
-                            <option value="ongoing">Ongoing</option>
-                        </select>
-                    </td>
-                )
-            }
-            {
-                type === "attendancePage" ? <td>{todayTask}</td> : type === "candidatePage" ? <td>{experience}</td> : <td>{designation}</td>
-            }
+            {type !== "attendancePage" && <td>{phoneNumber}</td>}
+            <td>{designation}</td>
+            {type !== "candidatePage" && <td>{department}</td>}
+
+            {type === "attendancePage" ? (
+                <td>{todayTask}</td>
+            ) : type === "candidatePage" ? (
+                <td>{experience}</td>
+            ) : null}
+
+            {type !== "employeePage" && (
+                <td>
+                    <select
+                        style={{ color: statusColor }}
+                        value={
+                            type === "candidatePage"
+                                ? status?.toLowerCase()
+                                : workingStatus?.toLowerCase()
+                        }
+                        onChange={(e) => handleStatus(userId, e.target.value)}
+                    >
+                        {options.map((option, index) => (
+                            <option
+                                key={index}
+                                value={option.replace(/\s+/g, "").toLowerCase()}
+                            >
+                                {option}
+                            </option>
+                        ))}
+                    </select>
+                </td>
+            )}
 
             {
-                type === "candidatePage" &&
-                <td className="resume">
-                    <a href={resumeLink} download target="_blank" rel="noopener noreferrer">
-                        <img src={DownloadImg} alt="" />
-                    </a>
-                    <a href={row.Resume} onClick={() => handleDeleteUser(userId)} target="_blank" rel="noopener noreferrer">
-                        <img src={DeleteIcon} alt="" />
-                    </a>
-                </td>
+                type === "candidatePage" && (
+
+                    <td className="resume">
+                        <a href={resumeLink} download target="_blank" rel="noopener noreferrer">
+                            <img src={DownloadImg} alt="Download" />
+                        </a>
+                    </td>)
             }
-            {
-                type === 'employeePage' && <td>{joiningDate}</td>
+
+            {type === "candidatePage" && (
+                <td>
+                    <button className="deleteButton" onClick={() => handleDeleteUser(userId)}>
+                        <img src={DeleteIcon} alt="Delete" />
+                    </button>
+                </td>)
+
             }
+
+            {type === "employeePage" && <td>{joiningDate ? new Date(joiningDate).toLocaleDateString() : "N/A"}</td>}
         </tr>
     );
 };
