@@ -1,0 +1,50 @@
+
+.profileContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profileTitle {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--primary-100);
+  }
+  
+  .profileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .submitButton {
+    padding: 12px;
+    background-color: var(--primary-100);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: var(--primary-200);
+  }
+  
+  @media screen and (max-width: 760px) {
+    .profileContainer {
+      padding: 15px;
+    }
+  
+    .profileTitle {
+      font-size: 20px;
+    }
+  }
+  

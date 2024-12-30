@@ -6,4 +6,5 @@ table{
     overflow: hidden; 
     border: 1px solid #ddd;
     text-align: start;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

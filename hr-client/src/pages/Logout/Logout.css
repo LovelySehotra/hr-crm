@@ -1,0 +1,46 @@
+
+.logoutPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; 
+    background-color:var(--background-color);
+}
+
+
+.logoutBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:var(--background-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    inline-size: 100%;
+    max-width: 600px;
+    padding-block-end: 1rem;
+    text-align: center;
+}
+
+
+.logoutBoxLabel {
+    background-color: var(--primary-100);
+    padding-block: 1rem;
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+}
+
+.logoutBoxLabel p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+.logoutButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: 20px;
+    inline-size: 100%;
+    gap: 15px;
+}

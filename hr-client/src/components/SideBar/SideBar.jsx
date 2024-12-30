@@ -101,7 +101,7 @@ const Sidebar = ({ children }) => {
                   onClick={() => handleClick("/lagout")}
                 >
                   <img src={Lagout} alt="lagout" />
-                  <Link to="/lagout">Logout</Link>
+                  <Link to="/logout">Logout</Link>
                 </li>
               </ul>
             </li>

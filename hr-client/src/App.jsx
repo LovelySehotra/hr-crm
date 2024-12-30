@@ -8,6 +8,8 @@ import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import { Sidebar } from './components'
 import Attendances from './pages/Attendances/Attendances'
+import Profile from './pages/Profile/Profile'
+import LagoutPage from "./pages/Logout/Logout"
 
 
 function App() {
@@ -39,8 +41,16 @@ function App() {
             <ProtectedRoute>
            <Attendances/>
           </ProtectedRoute>} />
+          <Route path='/profile' element={
+            <ProtectedRoute>
+          <Profile/>
+          </ProtectedRoute>} />
+          <Route path='/logout' element={
+            <ProtectedRoute>
+          <LagoutPage/>
+          </ProtectedRoute>} />
         </Routes>
-        {/* <Form/> */}
+      
       </div>
 
 
