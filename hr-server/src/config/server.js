@@ -12,7 +12,7 @@ export class Server {
         this.app = express();
         this.app.use(express.json());
         this.app.use(cors({
-            origin: [FRONTEND],
+            origin: FRONTEND,
             credentials: true
 
         }));
