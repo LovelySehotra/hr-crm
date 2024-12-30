@@ -5,7 +5,7 @@ import Profile from "../../assets/TopBar/Profile.png"
 import "./TableRow.css";
 
 const TableRow = ({ type, row, handleStatus,handleDeleteUser }) => {
-    const { _id: userId, fullName, email, phoneNumber, department, jobApplication: { experience, status, resumeLink }, joiningDate, workingStatus, todayTask, position } = row;
+    const { _id: userId, fullName, email, phoneNumber,designation, department, jobApplication: { experience, status, resumeLink }, joiningDate, workingStatus, todayTask, position } = row;
     const colorScheme = {
         scheduled: "orange",
         selected: "blue",
@@ -41,7 +41,7 @@ const TableRow = ({ type, row, handleStatus,handleDeleteUser }) => {
                 )
             }
             {
-                type === "attendancePage" ? <td>{todayTask}</td> : type === "candidatePage" ? <td>{experience}</td> : <td>{position}</td>
+                type === "attendancePage" ? <td>{todayTask}</td> : type === "candidatePage" ? <td>{experience}</td> : <td>{designation}</td>
             }
 
             {

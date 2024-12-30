@@ -28,11 +28,11 @@ const Employees = () => {
           <div className='candidatefilterOption'>
               <div>
              <SelectOption  options={selectOptions}/> 
-             <SelectOption  options={selectOptions}/> 
+             
               </div>
               <div>
                   <SearchBar placeholder="Search"/>
-                  <Button>Add New Candidates </Button>
+
               </div>
              
           </div>
