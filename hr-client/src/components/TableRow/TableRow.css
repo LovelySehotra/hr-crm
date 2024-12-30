@@ -20,6 +20,10 @@ td {
 .resume {
     text-decoration: none;
 }
+.taskInput{
+    padding-inline: 10px;
+    border: none;
+}
 
 td select {
     font-size: 12px;

@@ -29,7 +29,6 @@ const Attendances = () => {
   useEffect(() => {
     handleGetAllUser();
   }, [dispatch]);
-  console.log(rows)
   return (
     <Sidebar>
       <div>

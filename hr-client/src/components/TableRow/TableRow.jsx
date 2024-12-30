@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DownloadImg from "../../assets/Download.svg";
 import DeleteIcon from "../../assets/Delete.svg";
 import Profile from "../../assets/TopBar/Profile.png";
@@ -15,8 +15,32 @@ const TableRow = ({ type, row, handleStatus, handleDeleteUser }) => {
         jobApplication: { experience, status, resumeLink } = {},
         joiningDate,
         workingStatus,
-        todayTask,
+        todayTask: initialTask,
     } = row;
+
+    const [todayTask, setTodayTask] = useState(initialTask);
+    const [debouncedTask, setDebouncedTask] = useState(initialTask);
+
+    // Update the server when `debouncedTask` changes
+    useEffect(() => {
+        if (debouncedTask !== initialTask) {
+            const updateTask = async () => {
+                
+                              console.log(debouncedTask)
+            };
+
+            updateTask();
+        }
+    }, [debouncedTask, userId]);
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedTask(todayTask);
+        }, 500); 
+
+        return () => {
+            clearTimeout(handler); 
+        };
+    }, [todayTask]);
 
     const colorScheme = {
         scheduled: "orange",
@@ -33,6 +57,7 @@ const TableRow = ({ type, row, handleStatus, handleDeleteUser }) => {
         type === "candidatePage"
             ? ["Selected", "Rejected", "Ongoing", "New", "Scheduled"]
             : ["Absent", "Present", "Working from home", "Medical Leave"];
+
     return (
         <tr style={{ color: statusColor }}>
             <td
@@ -54,7 +79,13 @@ const TableRow = ({ type, row, handleStatus, handleDeleteUser }) => {
             {type !== "candidatePage" && <td>{department}</td>}
 
             {type === "attendancePage" ? (
-                <td>{todayTask}</td>
+                <td>
+                    <input
+                        value={todayTask}
+                        className="taskInput"
+                        onChange={(e) => setTodayTask(e.target.value)}
+                    />
+                </td>
             ) : type === "candidatePage" ? (
                 <td>{experience}</td>
             ) : null}
@@ -82,26 +113,23 @@ const TableRow = ({ type, row, handleStatus, handleDeleteUser }) => {
                 </td>
             )}
 
-            {
-                type === "candidatePage" && (
-
-                    <td className="resume">
-                        <a href={resumeLink} download target="_blank" rel="noopener noreferrer">
-                            <img src={DownloadImg} alt="Download" />
-                        </a>
-                    </td>)
-            }
+            {type === "candidatePage" && (
+                <td className="resume">
+                    <a href={resumeLink} download target="_blank" rel="noopener noreferrer">
+                        <img src={DownloadImg} alt="Download" />
+                    </a>
+                </td>
+            )}
 
             {type === "candidatePage" && (
                 <td>
                     <button className="deleteButton" onClick={() => handleDeleteUser(userId)}>
                         <img src={DeleteIcon} alt="Delete" />
                     </button>
-                </td>)
+                </td>
+            )}
 
-            }
-
-            {type === "employeePage" && <td>{joiningDate ? new Date(joiningDate).toLocaleDateString() : "N/A"}</td>}
+            {type === "employeePage" && <td>{joiningDate}</td>}
         </tr>
     );
 };
