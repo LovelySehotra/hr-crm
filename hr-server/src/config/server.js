@@ -2,9 +2,10 @@ import express from "express";
 import errorHandler from "../interface/middleware/error.middleware.js";
 import { appRouter } from "../interface/routers/index.js";
 import cors from "cors"
-import { FRONTEND} from "../config/index.js"
+// import { FRONTEND} from "../config/index.js"
 import { connectionToDB } from "../infrastructure/db.config.js";
 import { userDeserializer } from "../interface/middleware/userDeserialiser.js";
+import { corsConfig } from "../interface/middleware/cors.js";
 
 export class Server {
     constructor(config) {
@@ -12,9 +13,8 @@ export class Server {
         this.app = express();
         this.app.use(express.json());
         this.app.use(cors({
-            origin: FRONTEND,
-            credentials: true
-
+            origin:"https://hrcrm.vercel.app/",
+            credentials: true,
         }));
         this.app.use(userDeserializer)
         this.app.get("/ping", (req, res) => {
@@ -26,6 +26,7 @@ export class Server {
     }
 
     start() {
+       
         const port = this.config.port || 8000;
         
         this.app.listen(port, (err) => {
