@@ -12,10 +12,7 @@ export class Server {
         this.config = config || {};
         this.app = express();
         this.app.use(express.json());
-        this.app.use(cors({
-            origin:"https://hrcrm.vercel.app/",
-            credentials: true,
-        }));
+        this.app.use(cors(corsConfig));
         this.app.use(userDeserializer)
         this.app.get("/ping", (req, res) => {
             return res.status(200).json({ message: "pong@@" })

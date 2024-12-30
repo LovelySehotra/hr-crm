@@ -1,8 +1,12 @@
 // import { ENV } from "@/config";
-
+let allowedOrigins = ["https://hrcrm.vercel.app"]
 export const corsConfig = {
   origin: function (origin, callback) {
-    return callback(null, true);
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
