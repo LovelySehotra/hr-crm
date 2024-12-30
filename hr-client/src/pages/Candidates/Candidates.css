@@ -1,5 +1,5 @@
 .candidatesBox{
-    padding-inline: 1rem;
+    /* padding-inline: 1rem; */
 }
 .candidatefilterOption{
     display: flex;
@@ -30,4 +30,11 @@
     border-radius: 15px;
     color: var(--background-color);
     cursor: pointer;
+}
+@media screen and (max-width: 680px) {
+    .candidatefilterOption{
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
 }

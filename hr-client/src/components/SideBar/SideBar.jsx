@@ -8,39 +8,54 @@ import Leaves from "../../assets/SideBar/Leaves.svg";
 import Employees from "../../assets/SideBar/Employees.svg";
 import './SideBar.css';
 import Typography from '../Typography/Typography';
-import {SearchBar} from "../../components";
+import { SearchBar } from "../../components";
 
-const Sidebar = ({children}) => {
-  const location = useLocation(); 
+const Sidebar = ({ children }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [activePath, setActivePath] = useState(location.pathname);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar toggle
+
   const handleClick = (path) => {
-    setActivePath(path); 
+    setActivePath(path);
   };
+
   const handleSearch = (value) => {
     setActivePath(`/${value.toLowerCase()}`);
     navigate(activePath);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar state
+  };
+
   return (
     <div className="sidebarLayout">
       {/* Sidebar Section */}
-      <div className="sidebar">
-        <div className="sidebarTop">
+      <div className={`sidebar ${isSidebarOpen ? '' : 'closed'}`}>
+        <div>
+          <div className="sidebarTop">
           <Link to="/candidate">
-          <img src={Logo} alt="logo" />
+            <img src={Logo} alt="logo" />
           </Link>
-          <div className='sideBarSearch'>
-            <SearchBar placeholder="Search.." onSearch={handleSearch}/>
+          <button className="toggleButton" onClick={toggleSidebar}>
+          {isSidebarOpen ?"✕": "≡"} 
+        </button>
+          </div>
+          <div className="sideBarSearch">
+            <SearchBar placeholder="Search.." onSearch={handleSearch} />
           </div>
         </div>
+       
         <nav>
-          <ul className='sidebarMenu'>
+          <ul className="sidebarMenu">
             <li>
-              <Typography type="caption">Requirement</Typography>
-              <ul className='sidebarList'>
-                <li 
-                  className={activePath === "/candidate" ? "active" : ""}
+              <p className="subheading">
+                <Typography type="caption">Requirement</Typography>
+              </p>
+              <ul className="sidebarList">
+                <li
+                  className={` ${activePath === "/candidate" ? "active" : ""}`}
                   onClick={() => handleClick("/candidate")}
                 >
                   <img src={Candidate} alt="candidates" />
@@ -49,9 +64,11 @@ const Sidebar = ({children}) => {
               </ul>
             </li>
             <li>
-              <Typography type="caption">Organization</Typography>
-              <ul className='sidebarList'>
-                <li 
+              <p className="subheading">
+                <Typography type="caption">Organization</Typography>
+              </p>
+              <ul className="sidebarList">
+                <li
                   className={activePath === "/employee" ? "active" : ""}
                   onClick={() => handleClick("/employee")}
                 >
@@ -65,7 +82,7 @@ const Sidebar = ({children}) => {
                   <img src={Attendance} alt="attendance" />
                   <Link to="/attendance">Attendance</Link>
                 </li>
-                <li 
+                <li
                   className={activePath === "/leaves" ? "active" : ""}
                   onClick={() => handleClick("/leaves")}
                 >
@@ -75,9 +92,11 @@ const Sidebar = ({children}) => {
               </ul>
             </li>
             <li>
-              <Typography type="caption">Others</Typography>
-              <ul className='sidebarList'>
-                <li 
+              <p className="subheading">
+                <Typography type="caption">Others</Typography>
+              </p>
+              <ul className="sidebarList">
+                <li
                   className={activePath === "/lagout" ? "active" : ""}
                   onClick={() => handleClick("/lagout")}
                 >
@@ -90,7 +109,8 @@ const Sidebar = ({children}) => {
         </nav>
       </div>
 
-      <div className="mainContent">
+      {/* Main Content */}
+      <div className={`mainContent ${isSidebarOpen ? '' : 'fullWidth'}`}>
         {children}
       </div>
     </div>

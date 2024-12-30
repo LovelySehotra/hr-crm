@@ -25,7 +25,6 @@ const Attendances = () => {
     const response = await dispatch(getAllCandidates()).unwrap();
     setRows(response);
   };
-
   useEffect(() => {
     handleGetAllUser();
   }, [dispatch]);
