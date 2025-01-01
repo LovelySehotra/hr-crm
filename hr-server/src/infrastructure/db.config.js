@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import {DATABASE_URL}  from "../config/index.js";
 
 export  const connectionToDB = async()=>{
+    console.log(DATABASE_URL)
     try{
         const {connection }=await mongoose.connect(
             DATABASE_URL || 'mongodb://127.0.0.1:27017/lms'
