@@ -35,6 +35,16 @@ export const getAllUsers = async (userId) => {
 }
 export const getUserById = async (id) => {
   const user = await User.findById(id).select('-password');
-  if (!user) throw new AppError("User not found", 404);
+  if (!user) return new AppError("User not found", 404);
   return user;
+}
+export const updateUserById = async(userId,userData)=>{
+try {
+  const user = await User.findById(userId);
+  if(!user) return  new AppError("User not found",404);
+  const updatedUser = await User.findByIdAndUpdate(user._id,userData,{new:true});
+  return updatedUser
+} catch (error) {
+  return new AppError("Failed to update user",404)
+}
 }

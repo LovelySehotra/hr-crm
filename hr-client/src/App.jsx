@@ -10,6 +10,7 @@ import { Sidebar } from './components'
 import Attendances from './pages/Attendances/Attendances'
 import Profile from './pages/Profile/Profile'
 import LagoutPage from "./pages/Logout/Logout"
+import Leaves from './pages/Leaves/:eaves'
 
 
 function App() {
@@ -49,6 +50,12 @@ function App() {
             <ProtectedRoute>
           <LagoutPage/>
           </ProtectedRoute>} />
+          <Route path='/leaves' element={
+            // <ProtectedRoute>
+          <Leaves/>
+          // </ProtectedRoute>
+        } 
+          />
         </Routes>
       
       </div>

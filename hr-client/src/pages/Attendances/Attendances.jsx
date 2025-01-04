@@ -31,7 +31,7 @@ const Attendances = () => {
   return (
     <Sidebar>
       <div>
-        <DashboardTopBar label="Candidates" />
+        <DashboardTopBar label="Attendances" />
         <div className="candidatesBox">
           <div className="candidatefilterOption">
             <div>

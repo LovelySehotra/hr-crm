@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, DashboardTopBar, SearchBar, SelectOption, Sidebar } from '../../components'
+import { Button, DashboardTopBar, SearchBar, SelectOption, Sidebar, Typography } from '../../components'
 import { Table } from '../../features'
 import { useDispatch, useSelector } from 'react-redux';
 import {  getAllCandidates } from "../../redux/slices/CandidateManageSlice";
-import "./Employees.css"
+import "./Leaves.css"
 
-const Employees = () => {
+const Leaves = () => {
     const dispatch = useDispatch();
     const [rows, setRows] = useState([]);
     const selectOptions=[ { value: "all", label: "All" },]
-    const headings =["","Profile","Name","Email Address","Phone Number","Position","Department","Date of Joining"
+    const headings =["","Profile","Name",,"Phone Number","Position",,"Reason"
 
     ]
     const getAll = async () => {
@@ -17,13 +17,13 @@ const Employees = () => {
         setRows(response);
       };
       useEffect(() => {
-        getAll();
+        // getAll();
       }, [dispatch]);
      
     return (
       <Sidebar>
           <div >
-          <DashboardTopBar label="Employees"  />
+          <DashboardTopBar label="Leaves" />
           <div className='candidatesBox'>
           <div className='candidatefilterOption'>
               <div>
@@ -36,11 +36,13 @@ const Employees = () => {
               </div>
              
           </div>
-          <Table  type="employeePage" headings={headings} rows={rows} />
+          <Table  type="leavePage" headings={headings} rows={rows} />
+          {/* <Typography>Comming Soon</Typography> */}
+
           </div>
           </div>
       </Sidebar>
     )
 }
 
-export default Employees
+export default Leaves

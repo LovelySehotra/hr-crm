@@ -35,7 +35,7 @@ const Candidates = () => {
   };
 
   const closeDialog = () => {
-    setIsDialogOpen(response);
+    setIsDialogOpen(false);
   };
   const handleStatusUpdate=(userId,value)=>{
     console.log(userId)
@@ -85,7 +85,7 @@ const Candidates = () => {
     }
   };
   useEffect(() => {
-    handleGetAllUser();
+    // handleGetAllUser();
   }, [dispatch]);
   return (
     <Sidebar>
