@@ -1,5 +1,5 @@
 import { login, signup } from "../../application/services/AuthService/AuthService.js";
-import { createUserByAdmin, getAllUsers, updateUserById } from "../../application/services/UserService/UserService.js";
+import { createUserByAdmin, getAllUsers, getUserById, updateUserById } from "../../application/services/UserService/UserService.js";
 import AppError from "../utils/AppError.js";
 import catchAsync from "../utils/CatchAsync.js";
 
@@ -20,6 +20,12 @@ export class UserController {
         if(!userId) return next(new AppError("User not found"));
         const updatedUser = await updateUserById(userId,req.body);
         return res.status(200).json(updatedUser);
+    })
+    getLoginUser = catchAsync(async(req,res,next)=>{
+        const userId = req.user._id;
+        if(!userId) return next(new AppError("Access token is invalid"));
+        const user = await getUserById(userId);
+        return res.status(200).json(user)
     })
     getAllUserByAdmin = catchAsync(async(req,res)=>{
         const users = await getAllUsers();

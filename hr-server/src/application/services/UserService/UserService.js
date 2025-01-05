@@ -33,8 +33,8 @@ export const getAllUsers = async (userId) => {
   return users;
 
 }
-export const getUserById = async (id) => {
-  const user = await User.findById(id).select('-password');
+export const getUserById = async (userId) => {
+  const user = await User.findById(userId).select('-password');
   if (!user) return new AppError("User not found", 404);
   return user;
 }
