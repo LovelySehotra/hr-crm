@@ -13,6 +13,10 @@ router
 .route("/")
 .get(userController.getLoginUser)
 .patch(userController.updateLoginUser)
+
+router
+.route("/refresh-token")
+.post(userController.refreshAccessToken)
 router
 .route("/candidate")
 .post(userController.createUserByAdmin);

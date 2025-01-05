@@ -2,7 +2,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSliceReducer from "./slices/AuthSlice";
 import candidateManageReducer from "./slices/CandidateManageSlice"
-import { setupInterceptors } from "../helpers/axiosInstance";
+// import { setupInterceptors } from "../helpers/axiosInstance";
 const store = configureStore({
     reducer: {
         auth: authSliceReducer,
@@ -10,6 +10,6 @@ const store = configureStore({
     },
     devTools: true
 }) 
-setupInterceptors(store);
+// setupInterceptors(store);
 
 export default store;

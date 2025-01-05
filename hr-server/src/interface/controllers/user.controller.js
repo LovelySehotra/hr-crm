@@ -1,4 +1,5 @@
 import { login, signup } from "../../application/services/AuthService/AuthService.js";
+import { createAccessToken, decodeToken, exchangeRefreshTokenForAccess } from "../../application/services/AuthService/JwtService.js";
 import { createUserByAdmin, getAllUsers, getUserById, updateUserById } from "../../application/services/UserService/UserService.js";
 import AppError from "../utils/AppError.js";
 import catchAsync from "../utils/CatchAsync.js";
@@ -35,4 +36,17 @@ export class UserController {
         const user = await createUserByAdmin(req.user._id,req.body);
         return res.status(200).json(user)
     })
+    refreshAccessToken = catchAsync(async(req,res,next)=>{
+        const  {refreshToken} = req.body;
+        console.log(refreshToken)
+        if(!refreshToken) return next(new AppError("Refresh token is invalid"));
+        const accessToken = await exchangeRefreshTokenForAccess(refreshToken);
+        // res.cookie("accessToken", accessToken, {
+        //     maxAge: 60 * 60 * 1000, //1 hour
+        //     httpOnly: true
+        // });
+        res.status(200).json(accessToken)
+      
+    })
+    
 }

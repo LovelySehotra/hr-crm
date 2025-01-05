@@ -4,10 +4,15 @@ import AppError from "../../../interface/utils/AppError.js";
 
 
 export const createAccessToken = async (userId) => {
-    const token = jwt.sign({ userId }, JWT_SECRET, {
-        expiresIn: "2h",
-    });
-    return token;
+    try {
+        const token = jwt.sign({ userId }, JWT_SECRET, {
+            expiresIn: "2h",
+        });
+        return token;
+    } catch (error) {
+        return new AppError("Something went wrong",401)
+    }
+  
 }
 
 export const createRefreshToken = async (userId) => {
@@ -19,11 +24,15 @@ export const createRefreshToken = async (userId) => {
 
 export const exchangeRefreshTokenForAccess = async (refreshToken) => {
     const decoded = jwt.verify(refreshToken, JWT_SECRET);
-    return this.createAccessToken(decoded.userId);
+    return createAccessToken(decoded.userId);
 }
 
 export const decodeToken = async (token) => {
-    const decoded = jwt.verify(token, JWT_SECRET)
-    if(!decoded) throw new AppError("User token is invalid",401)
-    return decoded;
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET)
+        if(!decoded) return new AppError("User token is invalid",401)
+        return decoded;
+    } catch (error) {
+      return new AppError("UnAuthorized::Token is invalid",401)
+    }
 }
