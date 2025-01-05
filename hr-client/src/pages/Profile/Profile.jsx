@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Input } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDetail } from '../../redux/slices/AuthSlice';
+import { getUserDetail, updateUser } from '../../redux/slices/AuthSlice';
 
 import './Profile.css';
 
@@ -14,10 +14,10 @@ const Profile = () => {
     email: 'john.doe@example.com',
     phoneNumber: '123-456-7890',
     designation: 'Software Engineer',
-    department:'',
+    department: '',
     role: 'Developer',
   });
-  const getUser = async()=>{
+  const getUser = async () => {
     try {
       const res = await dispatch(getUserDetail());
       setUser({
@@ -40,13 +40,28 @@ const Profile = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Profile updated:', user);
+    const res = await dispatch(updateUser({
+      fullName: user.fullName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+    })).unwrap()
+    if (res.payload) {
+      console.log(res.payload)
+      setUser({
+        fullName: res.payload.fullName || '',
+        email: res.payload.email || '',
+        phoneNumber: res.payload.phoneNumber || '',
+        designation: res.payload.designation || '',
+        department: res.payload.department || '',
+        role: res.payload.role || '',
+      })
+    }
   };
-  useEffect(()=>{
+  useEffect(() => {
     getUser();
-  },[dispatch])
+  }, [dispatch])
 
   return (
     <div className='profileContainer'>
@@ -93,7 +108,7 @@ const Profile = () => {
           required={true}
           readOnly
         />
-           <Input
+        <Input
           label={true}
           labelText='Department'
           id='department'

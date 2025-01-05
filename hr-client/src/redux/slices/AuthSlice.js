@@ -73,8 +73,7 @@ export const getUserDetail = createAsyncThunk("auth/user", async () => {
 })
 export const updateUser = createAsyncThunk("auth/updateUser", async (data,{rejectWithValue}) => {
     try {
-        const res = await axiosInstance.get("/users", data);
-        console.log(res.data)
+        const res = await axiosInstance.patch("/users", data);
         return res.data;
     } catch (error) {
         console.log(error)
