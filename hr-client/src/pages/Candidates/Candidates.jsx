@@ -85,7 +85,7 @@ const Candidates = () => {
     }
   };
   useEffect(() => {
-    // handleGetAllUser();
+    handleGetAllUser();
   }, [dispatch]);
   return (
     <Sidebar>

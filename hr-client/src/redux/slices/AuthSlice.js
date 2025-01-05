@@ -56,11 +56,30 @@ export const register = createAsyncThunk("auth/register", async (data, { rejectW
 export const login = createAsyncThunk("auth/login", async (data, { rejectWithValue }) => {
     try {
         const res = await axiosInstance.post("/users/login", data);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+        return rejectWithValue(error.response?.data?.message || "Register failed");
+    }
+})
+export const getUserDetail = createAsyncThunk("auth/user", async () => {
+    try {
+        const res = await axiosInstance.get("/users");
+        return res.data;
+    } catch (error) {
+        console.log(error)
+        return rejectWithValue(error.response?.data?.message || "User detail failed");
+    }
+})
+export const updateUser = createAsyncThunk("auth/updateUser", async (data,{rejectWithValue}) => {
+    try {
+        const res = await axiosInstance.get("/users", data);
         console.log(res.data)
         return res.data;
     } catch (error) {
         console.log(error)
-        return rejectWithValue(error.response?.data?.message || "Login failed");
+        return rejectWithValue(error.response?.data?.message || "Update User failed");
     }
 })
+
 export default authSlice.reducer;
