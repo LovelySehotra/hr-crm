@@ -2,7 +2,7 @@ import express from "express";
 import errorHandler from "../interface/middleware/error.middleware.js";
 import { appRouter } from "../interface/routers/index.js";
 import cors from "cors"
-// import { FRONTEND} from "../config/index.js"
+import { UPLOADS_PATH,FRONTEND} from "../config/index.js"
 import { connectionToDB } from "../infrastructure/db.config.js";
 import { userDeserializer } from "../interface/middleware/userDeserialiser.js";
 import { corsConfig } from "../interface/middleware/cors.js";
@@ -17,6 +17,7 @@ export class Server {
         this.app.get("/ping", (req, res) => {
             return res.status(200).json({ message: "pong@@" })
         });
+        this.app.use("/api/uploads", express.static(UPLOADS_PATH));
         this.app.use("/api", appRouter);
         this.app.use(errorHandler);
 

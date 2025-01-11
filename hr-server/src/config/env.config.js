@@ -10,5 +10,6 @@ export const {
     DATABASE_URL,
     JWT_SECRET,
     DEFAULT_PASSWORD,
-    FRONTEND
+    FRONTEND,
+    UPLOADS_PATH
 } = process.env
