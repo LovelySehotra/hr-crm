@@ -47,7 +47,7 @@ export const getAllCandidates = createAsyncThunk("candidate/getAll", async (data
         return res.data;
     } catch (error) {
         console.log(error)
-        return rejectWithValue(error.response?.data?.message || "Login failed");
+        return rejectWithValue(error.response?.data?.message || "Get detail  failed");
     }
 })
 export const createUserByAdmin = createAsyncThunk("candidate/create",async(data,{rejectWithValue})=>{
@@ -57,7 +57,17 @@ export const createUserByAdmin = createAsyncThunk("candidate/create",async(data,
         return res.data;
     } catch (error) {
         console.log(error)
-        return rejectWithValue(error.response?.data?.message || "Login failed");
+        return rejectWithValue(error.response?.data?.message || "Create Admin  failed");
+    }
+})
+export const uploadImage = createAsyncThunk("upload/image",async(data,{rejectWithValue})=>{
+    try {
+        const res = await axiosInstance.post("/upload/images", data);
+        console.log(res.data)
+        return res.data;
+    } catch (error) {
+        console.log(error)
+        return rejectWithValue(error.response?.data?.message || "Upload failed");
     }
 })
 export default candidateManageSlice.reducer;
