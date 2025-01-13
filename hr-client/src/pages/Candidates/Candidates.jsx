@@ -3,7 +3,7 @@ import { Button, DashboardTopBar, DialogBox, SearchBar, SelectOption, Sidebar } 
 import { Table } from '../../features';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Candidates.css";
-import { createUserByAdmin, getAllCandidates } from "../../redux/slices/CandidateManageSlice";
+import { createUserByAdmin, getAllCandidates, uploadImage } from "../../redux/slices/CandidateManageSlice";
 import InputOutline from '../../components/InputOutline/InputOutline';
 import Checkbox from '../../components/Checkbox/Checkbox';
 
@@ -60,13 +60,14 @@ const Candidates = () => {
       setError("Check the condition");
       return;
     }
+    const resumeResponse = await dispatch(uploadImage(resume)).unwrap()
     const formData = {
       fullName,
       email,
       phoneNumber,
       jobApplication: {
         experience,
-        resumeLink: "https://pdfobject.com/pdf/sample.pdf",
+        resumeLink: resumeResponse,
         status: "new"
       }
     }
