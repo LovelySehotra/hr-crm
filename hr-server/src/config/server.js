@@ -11,7 +11,7 @@ export class Server {
     constructor(config) {
         this.config = config || {};
         this.app = express();
-        this.app.use(express.json());
+        this.app.use(express.json({ limit: "10mb" }));
         this.app.use(cors(corsConfig));
         this.app.use(userDeserializer)
         this.app.get("/ping", (req, res) => {

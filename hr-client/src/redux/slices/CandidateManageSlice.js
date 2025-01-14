@@ -62,6 +62,7 @@ export const createUserByAdmin = createAsyncThunk("candidate/create",async(data,
 })
 export const uploadImage = createAsyncThunk("upload/image",async(data,{rejectWithValue})=>{
     try {
+        console.log(data)
         const res = await axiosInstance.post("/upload/images", data);
         console.log(res.data)
         return res.data;

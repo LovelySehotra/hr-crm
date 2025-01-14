@@ -50,7 +50,7 @@ const Candidates = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     if (!fullName || !email || !phone || !resume || !experience || !department) {
       setError("All fields are required.");
       setLoading(false);
@@ -60,10 +60,13 @@ const Candidates = () => {
       setError("Check the condition");
       return;
     }
-    const resumeResponse = await dispatch(uploadImage(resume)).unwrap()
+    const resumeData = new FormData();
+    resumeData.append('image', resume);
+    const resumeResponse = await dispatch(uploadImage(resumeData)).unwrap()
+    console.log(resumeResponse)
     const formData = {
       fullName,
-      email,
+      email,  
       phoneNumber,
       jobApplication: {
         experience,
@@ -71,19 +74,19 @@ const Candidates = () => {
         status: "new"
       }
     }
-    try {
-      const response = await dispatch(createUserByAdmin(formData));
-      if (response) {
-        setLoading(false);
-        setIsDialogOpen(false);
-        setEmail("");
-        setFullName("")
-        setPhoneNumber("")
-      }
-    } catch (error) {
-      setError("Something went wrong.");
-      setLoading(false);
-    }
+    // try {
+    //   const response = await dispatch(createUserByAdmin(formData));
+    //   if (response) {
+    //     setLoading(false);
+    //     setIsDialogOpen(false);
+    //     setEmail("");
+    //     setFullName("")
+    //     setPhoneNumber("")
+    //   }
+    // } catch (error) {
+    //   setError("Something went wrong.");
+    //   setLoading(false);
+    // }
   };
   useEffect(() => {
     handleGetAllUser();
@@ -173,6 +176,7 @@ const Candidates = () => {
                   onChange={(e) => setResume(e.target.files[0])}
                   required
                 />
+                
                 {resume && <p>Uploaded File: {resume.name}</p>}
               </div>
 
