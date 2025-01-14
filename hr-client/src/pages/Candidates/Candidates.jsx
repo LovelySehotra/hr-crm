@@ -50,7 +50,7 @@ const Candidates = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setLoading(true);
+    setLoading(true);
     if (!fullName || !email || !phone || !resume || !experience || !department) {
       setError("All fields are required.");
       setLoading(false);
@@ -70,23 +70,26 @@ const Candidates = () => {
       phoneNumber,
       jobApplication: {
         experience,
-        resumeLink: resumeResponse,
+        resumeLink: resumeResponse.uri,
         status: "new"
       }
     }
-    // try {
-    //   const response = await dispatch(createUserByAdmin(formData));
-    //   if (response) {
-    //     setLoading(false);
-    //     setIsDialogOpen(false);
-    //     setEmail("");
-    //     setFullName("")
-    //     setPhoneNumber("")
-    //   }
-    // } catch (error) {
-    //   setError("Something went wrong.");
-    //   setLoading(false);
-    // }
+    try {
+      const response = await dispatch(createUserByAdmin(formData)).unwrap();
+      if (response) {
+        setLoading(false);
+        setIsDialogOpen(false);
+        setEmail("");
+        setFullName("")
+        setPhoneNumber("")
+        setDepartment("")
+        setResume(null)
+        setExperience("")
+      }
+    } catch (error) {
+      setError("Something went wrong.");
+      setLoading(false);
+    }
   };
   useEffect(() => {
     handleGetAllUser();

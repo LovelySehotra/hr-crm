@@ -62,10 +62,18 @@ export const createUserByAdmin = createAsyncThunk("candidate/create",async(data,
 })
 export const uploadImage = createAsyncThunk("upload/image",async(data,{rejectWithValue})=>{
     try {
-        console.log(data)
-        const res = await axiosInstance.post("/upload/images", data);
-        console.log(res.data)
-        return res.data;
+        const response = await fetch("http://localhost:5173/api/upload/images", {
+            method: "POST",
+            body: data, // Pass FormData directly
+          });
+    
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Unknown error occurred.");
+          }
+    
+          const result = await response.json();
+        return result;
     } catch (error) {
         console.log(error)
         return rejectWithValue(error.response?.data?.message || "Upload failed");
