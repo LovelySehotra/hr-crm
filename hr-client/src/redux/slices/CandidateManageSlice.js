@@ -79,4 +79,23 @@ export const uploadImage = createAsyncThunk("upload/image",async(data,{rejectWit
         return rejectWithValue(error.response?.data?.message || "Upload failed");
     }
 })
+export const uploadFile = createAsyncThunk("upload/file",async(data,{rejectWithValue})=>{
+    try {
+        const response = await fetch("http://localhost:5173/api/upload/files", {
+            method: "POST",
+            body: data, 
+          });
+    
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Unknown error occurred.");
+          }
+    
+          const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error)
+        return rejectWithValue(error.response?.data?.message || "Upload failed");
+    }
+})
 export default candidateManageSlice.reducer;

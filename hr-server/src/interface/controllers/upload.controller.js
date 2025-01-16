@@ -1,6 +1,7 @@
 
 export class UploadsController {
   handleNewImageUpload = async (req, res) => {
+    // console.log(req)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     if (!req.file) throw new Error("400::no file attached");

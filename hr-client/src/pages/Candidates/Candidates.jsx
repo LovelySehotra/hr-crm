@@ -3,7 +3,7 @@ import { Button, DashboardTopBar, DialogBox, SearchBar, SelectOption, Sidebar } 
 import { Table } from '../../features';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Candidates.css";
-import { createUserByAdmin, getAllCandidates, uploadImage } from "../../redux/slices/CandidateManageSlice";
+import { createUserByAdmin, getAllCandidates, uploadFile, } from "../../redux/slices/CandidateManageSlice";
 import InputOutline from '../../components/InputOutline/InputOutline';
 import Checkbox from '../../components/Checkbox/Checkbox';
 
@@ -62,7 +62,7 @@ const Candidates = () => {
     }
     const resumeData = new FormData();
     resumeData.append('image', resume);
-    const resumeResponse = await dispatch(uploadImage(resumeData)).unwrap()
+    const resumeResponse = await dispatch(uploadFile(resumeData)).unwrap()
     console.log(resumeResponse)
     const formData = {
       fullName,
