@@ -3,7 +3,7 @@ import "./SelectOption.css";
 
 const SelectOption = ({ options, value, onChange }) => {
   return (
-    <div className="selectContainer">
+    <div className="selectContainer" >
       <select className="selectDropdown" value={value} onChange={(e) => onChange(e.target.value)}>
         {options.map((option, index) => (
           <option key={index} value={option.value}>

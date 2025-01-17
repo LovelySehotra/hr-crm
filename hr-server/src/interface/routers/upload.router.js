@@ -7,7 +7,7 @@ const router = Router();
 router
 .route("/images")
 .post(uploadImage.single("image"),uploadController.handleNewImageUpload)
-
+router
 .route("/files")
 .post(uploadPdfFile.single("files"),uploadController.handleNewFileUpload)
 

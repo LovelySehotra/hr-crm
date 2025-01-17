@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./DragDrop.css";
 
-const DragDrop = () => {
+const TaskManagement = () => {
   const [tasks, setTasks] = useState({
     todo: [
       { id: "todotarget1", text: "Details of Task", project: "Project Name" },
@@ -47,51 +47,43 @@ const DragDrop = () => {
   const allowDrop = (event) => {
     event.preventDefault();
   };
-console.log(tasks)
+
   return (
-    <section className="mt-3">
-      <h5 className="text-center">Task Management (Drag and Drop)</h5>
-      <div className="container position-relative">
-        <div className="container my-3 my-lg-5">
-          <div className="row justify-content-center vh-100">
-            {Object.keys(tasks).map((category) => (
-              <div
-                key={category}
-                className={`col-3 shadow-sm mx-2 bg-light py-2`}
-                id={category}
-                onDrop={(event) => onDrop(event, category)}
-                onDragOver={allowDrop}
-              >
-                <h5>{category.toUpperCase()}</h5>
-                <div className="d-flex flex-column align-items-center justify-content-center mt-3">
-                  {tasks[category].map((task) => (
-                    <div
-                      key={task.id}
-                      id={task.id}
-                      draggable="true"
-                      onDragStart={(event) => onDragStart(event, task.id)}
-                      className={`card rounded-0 w-100 mb-3 border-0 border-start border-$
-                        {category === "todo" ? "primary" : category === "progress" ? "warning" : "success"} border-3 shadow-sm`}
-                    >
-                      <div className="card-body px-3 py-3">
-                        <div className="card-text mb-2">{task.text}</div>
-                        <div
-                          className={`bg-$
-                            {category === "todo" ? "primary" : category === "progress" ? "warning" : "success"} d-inline p-1 fw-semibold small text-white project-name`}
-                        >
-                          {task.project}
-                        </div>
-                      </div>
+    <section className="task-section">
+      <h5 className="section-title">Task Management (Drag and Drop)</h5>
+      <div className="container">
+        <div className="task-wrapper">
+          {Object.keys(tasks).map((category) => (
+            <div
+              key={category}
+              className={`task-category ${category}`}
+              id={category}
+              onDrop={(event) => onDrop(event, category)}
+              onDragOver={allowDrop}
+            >
+              <h5 className="category-title">{category.toUpperCase()}</h5>
+              <div className="tasks-container">
+                {tasks[category].map((task) => (
+                  <div
+                    key={task.id}
+                    id={task.id}
+                    draggable="true"
+                    onDragStart={(event) => onDragStart(event, task.id)}
+                    className={`task-card ${category}`}
+                  >
+                    <div className="task-card-body">
+                      <div className="task-text">{task.text}</div>
+                      <div className={`task-project ${category}`}>{task.project}</div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default DragDrop;
+export default TaskManagement;

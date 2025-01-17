@@ -11,6 +11,7 @@ import Attendances from './pages/Attendances/Attendances'
 import Profile from './pages/Profile/Profile'
 import LagoutPage from "./pages/Logout/Logout"
 import Leaves from './pages/Leaves/:eaves'
+import DragDrop from './components/DragDrop/DragDrop'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <>
       <div>
         <Routes>
+          <Route path='/drag' element={<DragDrop />} />
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />
@@ -57,7 +59,7 @@ function App() {
         } 
           />
         </Routes>
-      
+     
       </div>
 
 
