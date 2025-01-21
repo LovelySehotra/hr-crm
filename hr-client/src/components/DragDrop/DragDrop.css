@@ -35,20 +35,26 @@
 .tasks-container {
   display: flex;
   flex-direction: column;
+  gap: 15px; /* Space between tasks */
   align-items: center;
+  transition: gap 0.8s ease-in-out, margin 0.8s ease-in-out; /* Smooth transition for spacing */
 }
 
 .task-card {
   width: 100%;
-  margin-bottom: 1rem;
-  border: none;
   border-left: 5px solid;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out; /* Smoother animation for hover and removal */
 }
 
 .task-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.05); /* Hover effect with scaling */
+}
+
+.task-card.removing {
+  opacity: 0;
+  transform: scale(0.9); /* Shrink effect before removal */
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out; /* Animation for removal */
 }
 
 .task-card-body {
@@ -68,6 +74,7 @@
   color: white;
 }
 
+/* Category-Specific Styles */
 .todo {
   border-color: #007bff;
 }

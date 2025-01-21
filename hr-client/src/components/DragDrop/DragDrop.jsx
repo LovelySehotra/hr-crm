@@ -4,9 +4,11 @@ import "./DragDrop.css";
 const TaskManagement = () => {
   const [tasks, setTasks] = useState({
     todo: [
-      { id: "todotarget1", text: "Details of Task", project: "Project Name" },
-      { id: "todotarget2", text: "Details of Task", project: "Project Name" },
-      { id: "todotarget3", text: "Details of Task", project: "Project Name" },
+      { id: "todotarget1", text: "Details of Task", project: "Project Name One" },
+      { id: "todotarget2", text: "Details of Task", project: "Project Name two" },
+      { id: "todotarget3", text: "Details of Task", project: "Project Name three" },
+      { id: "todotarget4", text: "Details of Task", project: "Project Name four" },
+      { id: "todotarget5", text: "Details of Task", project: "Project Name five" },
     ],
     progress: [
       { id: "inprogresstarget1", text: "Details of Task", project: "Project Name" },
@@ -16,6 +18,8 @@ const TaskManagement = () => {
       { id: "completedtarget1", text: "Details of Task", project: "Project Name" },
     ],
   });
+
+  const [removingTaskId, setRemovingTaskId] = useState(null);
 
   const onDragStart = (event, taskId) => {
     event.dataTransfer.setData("taskId", taskId);
@@ -31,17 +35,23 @@ const TaskManagement = () => {
 
     const task = tasks[sourceCategory].find((task) => task.id === taskId);
 
-    setTasks((prevState) => {
-      const updatedSource = prevState[sourceCategory].filter(
-        (task) => task.id !== taskId
-      );
+    setRemovingTaskId(taskId); // Set the task to be removed for animation
+    setTimeout(() => {
+      // Update tasks after the animation
+      setTasks((prevState) => {
+        const updatedSource = prevState[sourceCategory].filter(
+          (task) => task.id !== taskId
+        );
 
-      return {
-        ...prevState,
-        [sourceCategory]: updatedSource,
-        [category]: [...prevState[category], task],
-      };
-    });
+        return {
+          ...prevState,
+          [sourceCategory]: updatedSource,
+          [category]: [...prevState[category], task],
+        };
+      });
+
+      setRemovingTaskId(null); // Reset the removing state
+    }, 300); // Match the CSS transition duration
   };
 
   const allowDrop = (event) => {
@@ -69,7 +79,9 @@ const TaskManagement = () => {
                     id={task.id}
                     draggable="true"
                     onDragStart={(event) => onDragStart(event, task.id)}
-                    className={`task-card ${category}`}
+                    className={`task-card ${category} ${
+                      removingTaskId === task.id ? "removing" : ""
+                    }`}
                   >
                     <div className="task-card-body">
                       <div className="task-text">{task.text}</div>
