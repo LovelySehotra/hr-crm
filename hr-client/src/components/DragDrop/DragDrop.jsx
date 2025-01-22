@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./DragDrop.css";
 
 const TaskManagement = () => {
+  const [isHovered, setIsHovered] = useState(false);
   const [tasks, setTasks] = useState({
     todo: [
       { id: "todotarget1", text: "Details of Task", project: "Project Name One" },
@@ -23,10 +24,13 @@ const TaskManagement = () => {
 
   const onDragStart = (event, taskId) => {
     event.dataTransfer.setData("taskId", taskId);
+    event.dataTransfer.effectAllowed = "move";
+    // event.dataTransfer.setDragImage(new Image(), 0, 0);
   };
 
   const onDrop = (event, category) => {
     event.preventDefault();
+    // event.dataTransfer.dropEffect = "move";
     const taskId = event.dataTransfer.getData("taskId");
 
     const sourceCategory = Object.keys(tasks).find((key) =>
@@ -60,6 +64,7 @@ const TaskManagement = () => {
 
   return (
     <section className="task-section">
+      
       <h5 className="section-title">Task Management (Drag and Drop)</h5>
       <div className="container">
         <div className="task-wrapper">
@@ -79,9 +84,8 @@ const TaskManagement = () => {
                     id={task.id}
                     draggable="true"
                     onDragStart={(event) => onDragStart(event, task.id)}
-                    className={`task-card ${category} ${
-                      removingTaskId === task.id ? "removing" : ""
-                    }`}
+                    className={`task-card ${category} ${removingTaskId === task.id ? "removing" : ""
+                      }`}
                   >
                     <div className="task-card-body">
                       <div className="task-text">{task.text}</div>

@@ -12,6 +12,7 @@ import Profile from './pages/Profile/Profile'
 import LagoutPage from "./pages/Logout/Logout"
 import Leaves from './pages/Leaves/:eaves'
 import DragDrop from './components/DragDrop/DragDrop'
+import KanbanBoard from './components/Kanban/Kanban'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <div>
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
+          <Route path='/kanban' element ={<KanbanBoard/>}/>
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />
