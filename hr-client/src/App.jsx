@@ -14,6 +14,8 @@ import Leaves from './pages/Leaves/:eaves'
 import DragDrop from './components/DragDrop/DragDrop'
 import KanbanBoard from './components/Kanban/Kanban'
 
+import ChatMessage from './components/chatMessage/ChatMessage'
+
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
           <Route path='/kanban' element ={<KanbanBoard/>}/>
+          <Route path = '/chat' element={<ChatMessage/>} />
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />
