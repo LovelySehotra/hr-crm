@@ -19,7 +19,23 @@ import ChatMessage from './components/chatMessage/ChatMessage'
 
 function App() {
 
-
+  const data = [
+    {
+      id: 1,
+      title: "Post 1",
+      comments: ["Great work!", "Keep it up!"],
+    },
+    {
+      id: 2,
+      title: "Post 2",
+      comments: ["This is amazing!", "Nice content.", "Love it!"],
+    },
+    {
+      id: 3,
+      title: "Post 3",
+      comments: ["Fantastic job!", "Brilliant idea!"],
+    },
+  ];
 
   return (
     <>
@@ -27,7 +43,7 @@ function App() {
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
           <Route path='/kanban' element ={<KanbanBoard/>}/>
-          <Route path = '/chat' element={<ChatMessage/>} />
+          <Route path = '/chat' element={<ChatMessage data={data}/>} />
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />

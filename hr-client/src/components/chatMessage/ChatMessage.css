@@ -1,67 +1,41 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f9f9f9;
-}
+.chatcontainer{
 
-.chatbox {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+    border: 1px solid black;
+    display: grid;
+    gap: 1rem;
+    inline-size: 500px;
+    margin-inline: auto;
+    padding: 1rem;
+    border-radius: 15px;
 
-.message {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
-
-.message-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.chatmessage{
+    display: grid;
+    gap: 1rem;
+    border-radius: 15px;
+    position: relative;
 }
-
-/* Node styling */
-.node {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background-color: grey;
-  transition: all 0.3s ease;
+.message{
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    background-color: rgb(128, 97, 97);
 }
-
-.highlighted {
-  background-color: green;
-  box-shadow: 0px 0px 5px 2px rgba(0, 255, 0, 0.8);
+.reply{
+    inline-size: 450px;
+    margin-inline-start: auto;
+    background-color: aquamarine;
 }
+.connector{
+    position: absolute;
+    /* background-color: #236edf; */
+    display: flex;
+    width: 2px;
+    z-index: 3;
+    height: 100px;
+    border-left: 1px dotted red;
+    inset-block-start: 100px;
+    inset-inline-start: 10px;
+    /* inset:0; */
 
-/* Text styling */
-p {
-  margin: 0;
-  cursor: pointer;
-}
-
-.highlight-text {
-  font-weight: bold;
-  color: green;
-}
-
-/* Line connecting replies */
-.replies {
-  margin-left: 25px;
-  position: relative;
-}
-
-.line {
-  height: 20px;
-  width: 2px;
-  background-color: grey;
-  margin-left: 4px;
-}
-
-.reply-row {
-  display: flex;
-  flex-direction: column;
 }
