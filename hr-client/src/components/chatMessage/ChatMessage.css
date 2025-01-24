@@ -1,5 +1,4 @@
 .chatcontainer{
-
     border: 1px solid black;
     display: grid;
     gap: 1rem;
@@ -22,20 +21,29 @@
     background-color: rgb(128, 97, 97);
 }
 .reply{
-    inline-size: 450px;
-    margin-inline-start: auto;
+    inline-size: 450px; 
+    margin-inline-start: auto; 
     background-color: aquamarine;
 }
+
+.replyBox{
+    /* background-color: aqua; */
+    position: relative;
+
+}
+
+
 .connector{
     position: absolute;
     /* background-color: #236edf; */
-    display: flex;
-    width: 2px;
+    width: 35px;
     z-index: 3;
-    height: 100px;
-    border-left: 1px dotted red;
-    inset-block-start: 100px;
-    inset-inline-start: 10px;
-    /* inset:0; */
+    height: 120%;
+    border-left: 1px dotted  black;
+    border-bottom: 1px dotted  black;
+    inset-block-end: 50%;
+    inset-inline-start: 15px;
+    border-radius: 0px 0 0 5px ;
+    z-index: -1;
 
 }

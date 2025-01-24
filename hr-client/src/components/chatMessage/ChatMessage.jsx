@@ -69,33 +69,65 @@ const ChatMessage = () => {
                       </span>
                     </div>
                   </div>
-                 
+
                 </div>
-                <div className="ag5 message reply">
-                  <img
-                    src={comment.profilePic}
-                    height="56"
-                    width="56"
-                    title="Profile Picture"
-                    alt={`Profile Picture of ${comment.name}`}
-                  />
-                  <div className="ac2">
-                    <div className="ac5" title="Facebook's comment">
-                      <p className="ac4">{comment.name}</p>
-                      <p className="ac3">{comment.comment}</p>
+                <div className='replyBox'>
+                  <div className="ag5 message reply">
+                    <img
+                      src={comment.profilePic}
+                      height="56"
+                      width="56"
+                      title="Profile Picture"
+                      alt={`Profile Picture of ${comment.name}`}
+                    />
+                    <div className="ac2">
+                      <div className="ac5" title="Facebook's comment">
+                        <p className="ac4">{comment.name}</p>
+                        <p className="ac3">{comment.comment}</p>
+                      </div>
+                      <div className="ac1">
+                        <u>{comment.time}</u>
+                        <u>Like</u>
+                        <u>Reply</u>
+                        <span className="ac0">
+                          <u>{comment.likes}</u>
+                        </span>
+                      </div>
                     </div>
-                    <div className="ac1">
-                      <u>{comment.time}</u>
-                      <u>Like</u>
-                      <u>Reply</u>
-                      <span className="ac0">
-                        <u>{comment.likes}</u>
-                      </span>
-                    </div>
+
                   </div>
-                 
+                  <div className='ag6 connector' ></div>
+
                 </div>
-                <div className='ag6 connector' ></div>
+                <div className='replyBox'>
+                  <div>
+                    <div className="ag5 message reply">
+                      <img
+                        src={comment.profilePic}
+                        height="56"
+                        width="56"
+                        title="Profile Picture"
+                        alt={`Profile Picture of ${comment.name}`}
+                      />
+                      <div className="ac2">
+                        <div className="ac5" title="Facebook's comment">
+                          <p className="ac4">{comment.name}</p>
+                          <p className="ac3">{comment.comment}</p>
+                        </div>
+                        <div className="ac1">
+                          <u>{comment.time}</u>
+                          <u>Like</u>
+                          <u>Reply</u>
+                          <span className="ac0">
+                            <u>{comment.likes}</u>
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div className='ag6 connector' ></div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
