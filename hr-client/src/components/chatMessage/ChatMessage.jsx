@@ -126,7 +126,9 @@ const ChatMessage = () => {
 
                     </div>
                     <div className='ag6 connector' ></div>
+                    
                   </div>
+                  
                 </div>
               </div>
             ))}
