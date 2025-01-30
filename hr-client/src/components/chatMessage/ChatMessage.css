@@ -35,7 +35,6 @@
 
 .connector{
     position: absolute;
-    /* background-color: #236edf; */
     width: 35px;
     z-index: 3;
     height: 120%;
@@ -46,4 +45,28 @@
     border-radius: 0px 0 0 5px ;
     z-index: -1;
 
+}
+.messageBox{
+    background-color: rgb(192, 221, 221);
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    border-radius: 15px;
+    inline-size: 85%;
+}
+.messageContainer{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.messageContainer img{
+    border-radius: 25px;
+}
+.heading h4{
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.heading p{
+    font-size: 0.6rem;
 }
