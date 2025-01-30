@@ -92,7 +92,7 @@ const kanbanData = {
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
           <Route path='/kanban' element ={<KanbanBoard initialData={kanbanData}/>}/>
-          <Route path = '/chat' element={<ChatMessage data={data}/>} />
+          <Route path = '/message' element={<ChatMessage data={data}/>} />
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />
