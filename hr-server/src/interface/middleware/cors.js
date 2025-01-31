@@ -1,5 +1,5 @@
-// import { ENV } from "@/config";
-let allowedOrigins = ["https://hrcrm.vercel.app","http://localhost:5174"]
+import { FRONTEND } from "@/config";
+let allowedOrigins = FRONTEND
 export const corsConfig = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
