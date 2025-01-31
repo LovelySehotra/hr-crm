@@ -8,7 +8,7 @@ export default {
 
 export const main = {
   args: {
-    initialMessages = [
+    initialMessages:[
         {
           sender: "John",
           message: "Hello!",
@@ -18,7 +18,7 @@ export const main = {
           sender: "Jane",
           message: "Hi there!",
           timestamp: "10:05 AM",
-        },
-      ];
+        }
+      ]
   },
 };
