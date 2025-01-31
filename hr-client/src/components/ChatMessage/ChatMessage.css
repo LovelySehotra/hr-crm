@@ -1,0 +1,20 @@
+.chatMessage {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+}
+
+.currentUser {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+}
+
+.chatMessage_sender {
+  font-weight: bold;
+}
+
+.chatMessage_timestamp {
+  font-size: 0.8em;
+  color: #666;
+}
