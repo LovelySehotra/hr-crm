@@ -13,8 +13,9 @@ import LagoutPage from "./pages/Logout/Logout"
 import Leaves from './pages/Leaves/:eaves'
 import DragDrop from './components/DragDrop/DragDrop'
 import KanbanBoard from './components/Kanban/Kanban'
+import ChatMessage from './components/ChatMessage/ChatMessage'
+import ChatBox from './features/ChatBox/ChatBox'
 
-import ChatMessage from './components/chatMessage/ChatMessage'
 
 
 function App() {
@@ -92,7 +93,18 @@ const kanbanData = {
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
           <Route path='/kanban' element ={<KanbanBoard initialData={kanbanData}/>}/>
-          <Route path = '/message' element={<ChatMessage data={data}/>} />
+          <Route path = '/message' element={<ChatBox initialMessages={[
+        {
+          sender: "John",
+          message: "Hello!",
+          timestamp: "10:00 AM",
+        },
+        {
+          sender: "Jane",
+          message: "Hi there!",
+          timestamp: "10:05 AM",
+        }
+      ]}/>} />
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />
