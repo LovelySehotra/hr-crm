@@ -1,17 +1,104 @@
-.chatBox {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border: 1px solid var(--primary-100);
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: var(--primary-100);
+/* General Styles */
+.chat-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #ff7f50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-  }
-  
-  .chatBox_messages {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    /* background-color: #f9f9f9; */
-  }
+.chat-button span {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.chat-box {
+  position: fixed;
+  /* bottom: 80px; */
+  /* right: 20px; */
+  /* width: 300px; */
+  inline-size: 100%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  visibility: visible;
+}
+
+.chat-box-header {
+  background-color: #c27bb2;
+  padding-inline: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.chat-box-header p {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.chat-box-body {
+  padding: 10px;
+  height: 250px;
+  overflow-y: auto;
+}
+
+.chat-box-body-send, 
+.chat-box-body-receive {
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+}
+
+.chat-box-body-send {
+  background-color: #3e1d52;
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-box-body-receive {
+  background-color: #eaeaea;
+  color: black;
+}
+
+.chat-box-footer {
+  display: flex;
+  padding: 10px;
+  background-color: #f1f1f1;
+  align-items: center;
+}
+
+.chat-box-footer input {
+  flex-grow: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.chat-box-footer button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.chat-box-footer .send {
+  color: #ff7f50;
+  cursor: pointer;
+}
+
+

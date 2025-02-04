@@ -1,35 +1,62 @@
 import React, { useState } from "react";
-// import ChatMessage from "../../components/ChatMessage/ChatMessage.jsx";
-// import ChatInput from "./ChatInput";
 import "./ChatBox.css";
-import ChatMessage from "../../components/ChatMessage/ChatMessage";
 
-const ChatBox = ({ initialMessages = [] }) => {
-  const [messages, setMessages] = useState(initialMessages);
+const ChatBox = () => {
 
-  const handleSendMessage = (message) => {
-    const newMessage = {
-      sender: "You",
-      message,
-      timestamp: new Date().toLocaleTimeString(),
-    };
-    setMessages([...messages, newMessage]);
+  const [messages, setMessages] = useState([
+    { text: "Hello! How can I help you?", sender: "bot" },
+    { text: "I have a question.", sender: "user" }
+  ]);
+  const [inputText, setInputText] = useState("");
+
+  const toggleChat = () => {
+    setChatOpen(!isChatOpen);
+  };
+
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
+
+  const sendMessage = () => {
+    if (inputText.trim() !== "") {
+      setMessages([...messages, { text: inputText, sender: "user" }]);
+      setInputText("");
+      setTimeout(() => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: "I'm just a bot, but I'll try my best!", sender: "bot" }
+        ]);
+      }, 1000);
+    }
   };
 
   return (
-    <div className="chatBox">
-      <div className="chatBox_messages">
-        {messages.map((msg, index) => (
-          <ChatMessage
-            key={index}
-            sender={msg.sender}
-            message={msg.message}
-            timestamp={msg.timestamp}
-            isCurrentUser={msg.sender === "You"}
-          />
-        ))}
-      </div>
-      {/* <ChatInput onSendMessage={handleSendMessage} /> */}
+    <div>
+        <div className="chat-box">
+          <div className="chat-box-header">
+            <p>Chat</p>
+            <p onClick={toggleChat} style={{ cursor: "pointer" }}>✖</p>
+          </div>
+          <div className="chat-box-body">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={msg.sender === "user" ? "chat-box-body-send" : "chat-box-body-receive"}
+              >
+                {msg.text}
+              </div>
+            ))}
+          </div>
+          <div className="chat-box-footer">
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="Type a message..."
+            />
+            <button className="send" onClick={sendMessage}>➤</button>
+          </div>
+        </div>
     </div>
   );
 };
