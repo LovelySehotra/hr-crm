@@ -1,4 +1,4 @@
-import { FRONTEND } from "@/config";
+import { FRONTEND } from "../../config/env.config.js";
 let allowedOrigins = FRONTEND
 export const corsConfig = {
   origin: function (origin, callback) {
