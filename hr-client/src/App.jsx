@@ -15,6 +15,7 @@ import DragDrop from './components/DragDrop/DragDrop'
 import KanbanBoard from './components/Kanban/Kanban'
 import ChatMessage from './components/ChatMessage/ChatMessage'
 import ChatBox from './features/ChatBox/ChatBox'
+import Breadcrumbs from './components/BreadCrumb/BreadCrumb'
 
 
 
@@ -90,6 +91,7 @@ const kanbanData = {
   return (
     <>
       <div>
+          <Breadcrumbs/>
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
           <Route path='/kanban' element ={<KanbanBoard initialData={kanbanData}/>}/>
