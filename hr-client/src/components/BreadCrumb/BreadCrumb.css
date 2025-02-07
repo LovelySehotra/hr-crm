@@ -1,0 +1,28 @@
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+  }
+  
+  .breadcrumb li {
+    margin-right: 10px;
+  }
+  
+  .breadcrumb li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+  }
+  
+  .breadcrumb li a:hover {
+    text-decoration: underline;
+  }
+  
+  .breadcrumb li:last-child a {
+    color: #6c757d;
+    cursor: default;
+    text-decoration: none;
+  }
+  
