@@ -4,6 +4,8 @@ import "./ChatBox.css";
 
 const ChatBox = () => {
   const socket = io("http://localhost:5174");
+  const [message, setMessage] = useState("");
+
 
   const [messages, setMessages] = useState([
     { text: "Hello! How can I help you?", sender: "bot" },
@@ -20,16 +22,8 @@ const ChatBox = () => {
   };
 
   const sendMessage = () => {
-    if (inputText.trim() !== "") {
-      setMessages([...messages, { text: inputText, sender: "user" }]);
-      setInputText("");
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: "I'm just a bot, but I'll try my best!", sender: "bot" }
-        ]);
-      }, 1000);
-    }
+    socket.emit("sendMessage", { content: message });
+    setMessage("");
   };
 
   useEffect(() => {
