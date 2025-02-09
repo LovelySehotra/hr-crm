@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
 import "./ChatBox.css";
 
 const ChatBox = () => {
+  const socket = io("http://localhost:5174");
 
   const [messages, setMessages] = useState([
     { text: "Hello! How can I help you?", sender: "bot" },
@@ -30,6 +32,11 @@ const ChatBox = () => {
     }
   };
 
+  useEffect(() => {
+    socket.on("receiveMessage", (data) => {
+        setMessages((prev) => [...prev, data]);
+    });
+}, []);
   return (
     <div>
         <div className="chat-box">
