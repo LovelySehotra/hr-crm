@@ -3,7 +3,8 @@ import Plus from "../../assets/Chat/Plus.png"
 import AddChat from "../../assets/Chat/AddChat.png"
 import More from "../../assets/Chat/More.png"
 import "./ChatHeader.css"
-const ChatHeader = ({variant,label="Chat Header",onAdd,onMore,backgroundColor,color="white"}) => {
+import SearchBar from '../SearchBar/SearchBar'
+const ChatHeader = ({variant,label="Chat Header",onAdd,onMore,backgroundColor="black",color="white"}) => {
     
   return (
     <div>
@@ -13,6 +14,10 @@ const ChatHeader = ({variant,label="Chat Header",onAdd,onMore,backgroundColor,co
             <img src={Plus} alt="" onClick={onAdd}/>
            { variant !=="channel" && <img src={More} alt="" onClick={onMore} />}
         </div>
+      </div>
+      <div className='chatSearch'>
+
+      <SearchBar placeholder="search ... " backgroundColor={backgroundColor} color="white"/>
       </div>
     </div>
   )
