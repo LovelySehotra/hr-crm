@@ -1,0 +1,17 @@
+.chatHeader{
+    background-color: rgb(2, 2, 2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 4px;
+    padding-inline: 16px;
+    
+}
+.chatHeaderIcon{
+
+}
+.chatHeaderIcon img{
+    inline-size: 40px;
+    filter: brightness(0) saturate(100%) invert(99%) sepia(11%) saturate(1643%) hue-rotate(306deg) brightness(108%) contrast(110%);
+    cursor: pointer;
+}
