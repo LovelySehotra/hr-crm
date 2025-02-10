@@ -16,6 +16,7 @@ import KanbanBoard from './components/Kanban/Kanban'
 import ChatMessage from './components/ChatMessage/ChatMessage'
 import ChatBox from './features/ChatBox/ChatBox'
 import Breadcrumbs from './components/BreadCrumb/BreadCrumb'
+import Chat from './pages/Chat/Chat'
 
 
 
@@ -38,75 +39,76 @@ function App() {
       comments: ["Fantastic job!", "Brilliant idea!"],
     },
   ];
-const kanbanData = {
-  columns: [
-    {
-      id: "todo",
-      title: "To Do",
-      tasks: [
-        {
-          id: "task-1",
-          title: "Design Homepage",
-          description: "Create wireframes for the homepage layout",
-          priority: "High",
-          assignee: "Alice",
-        },
-        {
-          id: "task-2",
-          title: "Set Up Environment",
-          description: "Install Node.js and necessary dependencies",
-          priority: "Medium",
-          assignee: "Bob",
-        },
-      ],
-    },
-    {
-      id: "in-progress",
-      title: "In Progress",
-      tasks: [
-        {
-          id: "task-3",
-          title: "Develop Login Feature",
-          description: "Implement user authentication using JWT",
-          priority: "High",
-          assignee: "Charlie",
-        },
-      ],
-    },
-    {
-      id: "done",
-      title: "Done",
-      tasks: [
-        {
-          id: "task-4",
-          title: "Set Up Database",
-          description: "Configure MongoDB and create initial schema",
-          priority: "Medium",
-          assignee: "Diana",
-        },
-      ],
-    },
-  ]
-}
+  const kanbanData = {
+    columns: [
+      {
+        id: "todo",
+        title: "To Do",
+        tasks: [
+          {
+            id: "task-1",
+            title: "Design Homepage",
+            description: "Create wireframes for the homepage layout",
+            priority: "High",
+            assignee: "Alice",
+          },
+          {
+            id: "task-2",
+            title: "Set Up Environment",
+            description: "Install Node.js and necessary dependencies",
+            priority: "Medium",
+            assignee: "Bob",
+          },
+        ],
+      },
+      {
+        id: "in-progress",
+        title: "In Progress",
+        tasks: [
+          {
+            id: "task-3",
+            title: "Develop Login Feature",
+            description: "Implement user authentication using JWT",
+            priority: "High",
+            assignee: "Charlie",
+          },
+        ],
+      },
+      {
+        id: "done",
+        title: "Done",
+        tasks: [
+          {
+            id: "task-4",
+            title: "Set Up Database",
+            description: "Configure MongoDB and create initial schema",
+            priority: "Medium",
+            assignee: "Diana",
+          },
+        ],
+      },
+    ]
+  }
   return (
     <>
       <div>
-          <Breadcrumbs/>
+        <Breadcrumbs />
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
-          <Route path='/kanban' element ={<KanbanBoard initialData={kanbanData}/>}/>
-          <Route path = '/message' element={<ChatBox initialMessages={[
-        {
-          sender: "John",
-          message: "Hello!",
-          timestamp: "10:00 AM",
-        },
-        {
-          sender: "Jane",
-          message: "Hi there!",
-          timestamp: "10:05 AM",
-        }
-      ]}/>} />
+          <Route path='/kanban' element={<KanbanBoard initialData={kanbanData} />} />
+          <Route path='/message' element={<ChatBox initialMessages={[
+            {
+              sender: "John",
+              message: "Hello!",
+              timestamp: "10:00 AM",
+            },
+            {
+              sender: "Jane",
+              message: "Hi there!",
+              timestamp: "10:05 AM",
+            }
+          ]} />} />
+          <Route path='/chat' element={<Chat />} />
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />
@@ -122,28 +124,28 @@ const kanbanData = {
           } />
           <Route path='/employee' element={
             <ProtectedRoute>
-            <Employees />
-          </ProtectedRoute>} />
+              <Employees />
+            </ProtectedRoute>} />
           <Route path='/attendance' element={
             <ProtectedRoute>
-           <Attendances/>
-          </ProtectedRoute>} />
+              <Attendances />
+            </ProtectedRoute>} />
           <Route path='/profile' element={
             <ProtectedRoute>
-          <Profile/>
-          </ProtectedRoute>} />
+              <Profile />
+            </ProtectedRoute>} />
           <Route path='/logout' element={
             <ProtectedRoute>
-          <LagoutPage/>
-          </ProtectedRoute>} />
+              <LagoutPage />
+            </ProtectedRoute>} />
           <Route path='/leaves' element={
             // <ProtectedRoute>
-          <Leaves/>
-          // </ProtectedRoute>
-        } 
+            <Leaves />
+            // </ProtectedRoute>
+          }
           />
         </Routes>
-     
+
       </div>
 
 

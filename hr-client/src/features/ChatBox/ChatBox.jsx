@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./ChatBox.css";
 
+const socket = io("http://localhost:5174");
 const ChatBox = () => {
-  const socket = io("http://localhost:5174");
   const [message, setMessage] = useState("");
 
 
@@ -11,7 +11,7 @@ const ChatBox = () => {
     { text: "Hello! How can I help you?", sender: "bot" },
     { text: "I have a question.", sender: "user" }
   ]);
-  const [inputText, setInputText] = useState("");
+
 
   const toggleChat = () => {
     setChatOpen(!isChatOpen);
@@ -22,12 +22,14 @@ const ChatBox = () => {
   };
 
   const sendMessage = () => {
-    socket.emit("sendMessage", { content: message });
+    console.log(message)
+    socket.emit("sendMessage", { text: message ,sender: "user"});
     setMessage("");
   };
 
   useEffect(() => {
     socket.on("receiveMessage", (data) => {
+      console.log(data)
         setMessages((prev) => [...prev, data]);
     });
 }, []);
@@ -51,8 +53,8 @@ const ChatBox = () => {
           <div className="chat-box-footer">
             <input
               type="text"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="Type a message..."
             />
             <button className="send" onClick={sendMessage}>➤</button>
