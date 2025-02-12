@@ -10,7 +10,7 @@ const Chat = () => {
     <div>
       <ChatSIdeBar>
         <div className='sectionOne'>
-          <div>
+          <div className='subSection'>
 
             <ChatHeader backgroundColor=' rgb(32, 44, 51)' />
             <div className='chatlistBox'>
@@ -29,7 +29,7 @@ const Chat = () => {
               <ChatListItem />
             </div>
           </div>
-          <div>
+          <div className='chatBoxSection'>
             <ChatBox/>
           </div>
         </div>

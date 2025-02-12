@@ -1,6 +1,6 @@
 
 .main_box{
-    block-size: 91vh;
+    /* block-size: 91vh; */
     inline-size: 100%;
     background-color: rgb(12, 12, 12);
     display: flex;

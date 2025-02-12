@@ -92,7 +92,7 @@ function App() {
   return (
     <>
       <div>
-        <Breadcrumbs />
+        {/* <Breadcrumbs /> */}
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
           <Route path='/kanban' element={<KanbanBoard initialData={kanbanData} />} />

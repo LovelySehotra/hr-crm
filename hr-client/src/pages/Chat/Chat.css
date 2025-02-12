@@ -2,11 +2,22 @@
     /* padding-inline: 16px; */
     display: grid;
     grid-template-columns: 0.4fr 1fr;
+    block-size: 100vh;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  
+}
+.subSection{
+    border-inline-end: 1px solid rgb(167, 164, 164);
 }
 .chatlistBox{
     margin-block: 16px;
-    max-block-size: 650px;
+    max-block-size: 750px;
     overflow-y: auto;
 
     scrollbar-width: none;
+}
+.chatBoxSection{
+    padding-inline-start: 8px;
+    /* background-color: antiquewhite; */
 }
