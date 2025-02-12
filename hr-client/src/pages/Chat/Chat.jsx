@@ -1,10 +1,15 @@
 import React from 'react'
 import ChatSIdeBar from '../../components/ChatSideBar/ChatSIdeBar'
+import ChatListItem from '../../components/ChatListItem/ChatListItem'
 
 const Chat = () => {
   return (
     <div>
-      <ChatSIdeBar/>
+      <ChatSIdeBar>
+
+      <ChatListItem/>
+      </ChatSIdeBar>
+      
     </div>
   )
 }

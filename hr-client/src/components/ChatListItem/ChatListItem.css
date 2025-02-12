@@ -1,0 +1,26 @@
+.chatListItemBox{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: rgb(39, 38, 37);
+    color: white;
+    padding-inline: 16px;
+    padding-block: 16px;
+
+}
+.chatProfile{
+    inline-size: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: black;
+}
+.chatContent{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    inline-size: 100%;
+}
+
+.chatListItemBox:hover{
+    background-color: rgb(85, 87, 88);
+}

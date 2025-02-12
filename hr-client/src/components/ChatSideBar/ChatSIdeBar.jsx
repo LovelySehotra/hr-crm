@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Chat from "../../assets/Chat/Chat.png";
 import Status from "../../assets/Chat/Status.png";
 import Channel from "../../assets/Chat/Channel.png";
 import Profile from "../../assets/TopBar/Profile.png"
 import "./ChatSIdeBar.css"
-const ChatSIdeBar = () => {
+const ChatSIdeBar = ({children}) => {
   return (
     <main className='main_box'>
       <div className="chat_sidebar">
@@ -33,6 +33,8 @@ const ChatSIdeBar = () => {
           </div>
         </div>
       </div>
+
+      {children}
     </main>
   )
 }
