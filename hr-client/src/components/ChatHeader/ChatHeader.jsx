@@ -7,8 +7,8 @@ import SearchBar from '../SearchBar/SearchBar'
 const ChatHeader = ({variant,label="Chat Header",onAdd,onMore,backgroundColor="black",color="white"}) => {
     
   return (
-    <div>
-      <div style={{backgroundColor:backgroundColor}} className='chatHeader'>
+    <div className='chatHeader_box'>
+      <div  className='chatHeader'>
         <h3 style={{color:color}}>{label}</h3>
         <div className='chatHeaderIcon'>
             <img src={Plus} alt="" onClick={onAdd}/>

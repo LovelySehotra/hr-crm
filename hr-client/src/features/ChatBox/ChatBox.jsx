@@ -34,7 +34,7 @@ const ChatBox = () => {
     });
 }, []);
   return (
-    <div>
+    <>
         <div className="chat-box">
           <div className="chat-box-header">
             <p>Chat</p>
@@ -60,7 +60,7 @@ const ChatBox = () => {
             <button className="send" onClick={sendMessage}>➤</button>
           </div>
         </div>
-    </div>
+    </>
   );
 };
 

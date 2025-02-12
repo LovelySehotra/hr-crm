@@ -2,10 +2,10 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    background-color: rgb(39, 38, 37);
+    background-color: transparent;
     color: white;
-    padding-inline: 16px;
-    padding-block: 16px;
+    padding-inline: 20px;
+    padding-block: 8px;
 
 }
 .chatProfile{
@@ -19,6 +19,13 @@
     align-items: center;
     justify-content: space-between;
     inline-size: 100%;
+}
+.chatListImg img{
+    background-color: aqua;
+    inline-size: 50px;
+    block-size: 50px;
+    object-fit: cover;
+    
 }
 
 .chatListItemBox:hover{

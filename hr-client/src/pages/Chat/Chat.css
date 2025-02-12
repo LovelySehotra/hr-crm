@@ -1,0 +1,12 @@
+.sectionOne{
+    /* padding-inline: 16px; */
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+}
+.chatlistBox{
+    margin-block: 16px;
+    max-block-size: 650px;
+    overflow-y: auto;
+
+    scrollbar-width: none;
+}

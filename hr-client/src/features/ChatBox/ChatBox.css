@@ -22,16 +22,14 @@
 }
 
 .chat-box {
-  position: fixed;
-  /* bottom: 80px; */
-  /* right: 20px; */
-  /* width: 300px; */
+  /* position: fixed; */
   inline-size: 100%;
-  background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   visibility: visible;
+  block-size: 100%;
+  background-color: #f1f1f1;
 }
 
 .chat-box-header {

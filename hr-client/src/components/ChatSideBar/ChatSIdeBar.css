@@ -3,6 +3,7 @@
     block-size: 91vh;
     inline-size: 100%;
     background-color: rgb(12, 12, 12);
+    display: flex;
 }
 .chat_sidebar{
      background-color: rgb(32, 44, 51);
@@ -28,4 +29,9 @@
 .box_icon:hover{
     background-color: rgb(72, 73, 72);
     border-radius: 50%;
+}
+.sidebar_children{
+    /* background-color: aqua; */
+    background-color: rgb(32, 44, 51);
+    inline-size: 100%;
 }

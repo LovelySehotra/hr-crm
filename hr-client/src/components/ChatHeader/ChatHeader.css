@@ -1,11 +1,14 @@
 .chatHeader{
-    background-color: rgb(2, 2, 2);
+    background-color: rgb(32, 44, 51);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-block: 4px;
-    padding-inline: 16px;
+    /* padding-inline: 16px; */
     
+}
+.chatHeader_box{
+    padding-inline: 16px;
 }
 .chatHeaderIcon{
 
