@@ -8,16 +8,24 @@ import { useDispatch } from 'react-redux'
 import { getUserDetail } from '../../redux/slices/AuthSlice'
 
 const Chat = () => {
-  const dispatch =  useDispatch()
-  const getUser = async()=>{
-    const data =  await dispatch(getUserDetail()).unwrap();
-    if(data) console.log(data)
-
+  const dispatch = useDispatch()
+  const getUser = async () => {
+    try {
+      const data = await dispatch(getUserDetail()).unwrap();
+      if (data) console.log(data)
+      socket.emit("register", data._id);
+      socket.emit("status", {
+        userId: data._id,
+        status: "online",
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getUser()
-  },[dispatch])
+  }, [dispatch])
   return (
     <div>
       <ChatSIdeBar>
@@ -42,7 +50,7 @@ const Chat = () => {
             </div>
           </div>
           <div className='chatBoxSection'>
-            <ChatBox/>
+            <ChatBox />
           </div>
         </div>
       </ChatSIdeBar>
