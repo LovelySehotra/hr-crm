@@ -22,6 +22,21 @@ class singleChatSocket {
         this.emitStatus("online");
 
     }
+    async unRegister() {
+        const data = {
+          socketId: this.socket.id,
+          lastSeen: Date.now(),
+          status: "offline",
+        };
+    
+        await User.findOneAndUpdate({ socketId: this.socket.id }, data);
+        this.emitStatus("offline");
+    
+        this.socket.off("sendMessage", this.sendMessage);
+        this.socket.off("deleteMessage", this.deleteMessage);
+        this.socket.off("selectContact", this.selectContact);
+        this.socket.off("register", this.register);
+      }
     async sendMessage(data) {
         const { me, to, message, replyMessage } = data;
         const { file } = message;
