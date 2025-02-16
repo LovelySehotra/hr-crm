@@ -158,4 +158,9 @@ class singleChatSocket {
           this.io.to(this.socket.id).emit("receiveMessage", newMessage);
           this.io.to(receiverSocketId).emit("NewMessageNotification", newMessage);
     }
+    async sendIceCandidate(data) {
+        const { to, candidate, from } = data;
+        const { socketId } = await User.findById(to);
+        this.io.to(socketId).emit("OnIncomingIceCandidate", { from, candidate });
+      }
 } 
