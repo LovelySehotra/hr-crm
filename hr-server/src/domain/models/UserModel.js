@@ -50,7 +50,25 @@ const UserSchema = new Schema({
         type: String,
         enum: ['work from home', 'present', 'absent', 'medical leave'],
         required: false
-    }
+    },
+    profile: {
+        privacy: {
+          profilePhoto: { type: Boolean, default: true },
+          about: { type: Boolean, default: true },
+          status: { type: Boolean, default: true },
+        },
+        about: { type: String, default: "I'm using GigaSync App" },
+        avatar: { type: String },
+        blockedUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+      },
+    isAvatar: { type: Boolean, default: false },
+    createdAt: { type: Date, default: Date.now },
+    contacts: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    allChats: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    favoritesChats: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    socketId: String,
+    status: { type: String, default: "offline" },
+    lastSeen: { type: Date, default: Date.now }
 
 })
 UserSchema.pre('save', async function (next) {

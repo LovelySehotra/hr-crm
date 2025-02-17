@@ -164,3 +164,4 @@ class singleChatSocket {
         this.io.to(socketId).emit("OnIncomingIceCandidate", { from, candidate });
       }
 } 
+export default singleChatSocket;
