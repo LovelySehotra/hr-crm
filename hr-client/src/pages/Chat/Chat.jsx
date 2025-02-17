@@ -6,12 +6,14 @@ import './Chat.css'
 import ChatBox from '../../features/ChatBox/ChatBox'
 import { useDispatch } from 'react-redux'
 import { getUserDetail } from '../../redux/slices/AuthSlice'
+import socket from '../../config/Socket'
 
 const Chat = () => {
   const dispatch = useDispatch()
   const getUser = async () => {
     try {
       const data = await dispatch(getUserDetail()).unwrap();
+      console.log(data);
       if (data) console.log(data)
       socket.emit("register", data._id);
       socket.emit("status", {

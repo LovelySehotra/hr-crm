@@ -1,5 +1,5 @@
 import io from "socket.io-client";
 
-const socket = io(process.env.VITE_APP_BACKEND_HOST );
+const socket = io(import.meta.env.VITE_PUBLIC_BASE_URI);
 
 export default socket;
