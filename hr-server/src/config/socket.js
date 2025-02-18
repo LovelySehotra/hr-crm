@@ -1,3 +1,5 @@
+import singleChatSocket from "../interface/controllers/singleChatSocket.js";
+
 export class socketConnection {
     constructor(io) {
         this.io = io;
@@ -5,23 +7,13 @@ export class socketConnection {
 
     connect() {
         this.io.on("connection", (socket) => {
-            console.log(`A user connected: ${socket.id}`);
-
-            socket.on("sendMessage", (data) => {
-                console.log(`Message from ${socket.id}:`, data);
-                socket.broadcast.emit("receiveMessage", data); // Broadcast to other clients
-            });
-
-            socket.on("disconnect", () => {
-                console.log(`User disconnected: ${socket.id}`);
-            });
-            // socket.on("sendMessage", (data) => {
-            //     io.emit("receiveMessage", data);
-            // });
-        
-            // socket.on("disconnect", () => {
-            //     console.log("User disconnected");
-            // });
+            console.log("New client connected:", socket.id);
+            try {
+                new singleChatSocket(socket, this.io);
+                console.log("singleChatSocket instance created successfully.");
+            } catch (error) {
+                console.error("Error creating singleChatSocket instance:", error);
+            }
         });
     }
 }

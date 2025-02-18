@@ -12,9 +12,16 @@ const Chat = () => {
   const dispatch = useDispatch()
   const getUser = async () => {
     try {
+    
       const data = await dispatch(getUserDetail()).unwrap();
-      console.log(data);
-      if (data) console.log(data)
+      if (data) {
+        console.log(data)
+       
+      }
+      if (!socket || !socket.connected) {
+        console.error("Socket is not connected!");
+        return;
+      }
       socket.emit("register", data._id);
       socket.emit("status", {
         userId: data._id,
