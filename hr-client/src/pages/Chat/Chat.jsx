@@ -10,14 +10,12 @@ import socket from '../../config/Socket'
 
 const Chat = () => {
   const dispatch = useDispatch()
+  const [message, setMessage] = useState("");
   const getUser = async () => {
     try {
     
       const data = await dispatch(getUserDetail()).unwrap();
-      if (data) {
-        console.log(data)
-       
-      }
+
       if (!socket || !socket.connected) {
         console.error("Socket is not connected!");
         return;
@@ -30,6 +28,27 @@ const Chat = () => {
     } catch (error) {
       console.log(error)
     }
+  }
+  const sendMessage = ()=>{
+    if (message === "") return;
+    const Message = {
+      me: SUserProfile?._id,
+      to: SActiveChat?._id,
+      message: {
+        file: {
+          type: UFiles.fileType ? UFiles.fileType : "text",
+          data: UFiles.data ? UFiles.data : "text",
+        },
+        text: message,
+        links: extractLinks(message),
+      },
+      replyMessage: {
+        to: props.replyMessage.data?.sender._id,
+        message: props.replyMessage.data?.message,
+      },
+    };
+    socket.emit("sendMessage", Message);
+    setMessage("");
   }
 
   useEffect(() => {

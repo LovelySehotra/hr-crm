@@ -9,6 +9,7 @@ class singleChatSocket {
       // @event for handling Chat Message
       this.socket.on("register", this.register.bind(this));
       this.socket.on("disconnect", this.unRegister.bind(this));
+      this.socket.on("sendMessage", this.sendMessage.bind(this));
   }
 
   async register(userId) {
@@ -18,7 +19,8 @@ class singleChatSocket {
           status: "online"
       };
       console.log("User Registered with ID:", userId);
-      await updateUserById(userId, data);
+      const user = await updateUserById(userId, data);
+      console.log("User Updated:", user);
       this.emitStatus("online");
   }
 
@@ -32,10 +34,10 @@ class singleChatSocket {
       await User.findOneAndUpdate({ socketId: this.socket.id }, data);
       this.emitStatus("offline");
 
-      // this.socket.off("sendMessage", this.sendMessage);
-      // this.socket.off("deleteMessage", this.deleteMessage);
-      // this.socket.off("selectContact", this.selectContact);
-      // this.socket.off("register", this.register);
+      this.socket.off("sendMessage", this.sendMessage);
+    //   this.socket.off("deleteMessage", this.deleteMessage);
+    //   this.socket.off("selectContact", this.selectContact);
+      this.socket.off("register", this.register);
   }
 
   async sendMessage(data) {
