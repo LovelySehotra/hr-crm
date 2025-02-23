@@ -41,6 +41,7 @@ class singleChatSocket {
   }
 
   async sendMessage(data) {
+    console.log(data);
       const { me, to, message, replyMessage } = data;
       const { file } = message;
 

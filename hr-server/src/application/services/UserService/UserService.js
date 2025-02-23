@@ -1,4 +1,5 @@
 import { DEFAULT_PASSWORD } from "../../../config/index.js";
+import { ChatModel } from "../../../domain/models/ChatModel.js";
 import { User } from "../../../domain/models/UserModel.js";
 import AppError from "../../../interface/utils/AppError.js";
 
@@ -47,4 +48,36 @@ try {
 } catch (error) {
   return new AppError("Failed to update user",404)
 }
+}
+export const getAllChatsByUser = async(userId)=>{
+  try {
+    const {allChats} = await User.findOne({_id:userId},{allChats:1,_id:0}).populate({
+      path:"allChats",
+      select:"fullName username avatarColor isAvatar profile.privacy.profilePhoto"
+    })
+    if (allChats.length <= 0) {
+      return [];
+    }
+    const modifiedChats = await Promise.all(
+      allChats.map(async(user)=>{
+        const getMessages = await ChatModel.findOne({
+          chatWithin:{$all:[user.id,userId]},
+
+        },
+        {
+          messages:1,
+          _id:0
+        }
+      );
+      return{
+        message:getMessages?.messages[getMessages?.messages.length-1]?.message,
+        user,timestamp:getMessages?.messages[getMessages?.messages.length-1]?.timestamp,
+      }
+      })
+    )
+    return modifiedChats;
+  } catch (error) {
+    // return res.status(500).send(error.message);
+    return new AppError("Failed to get all Chat",500)
+  }
 }

@@ -12,12 +12,21 @@
 }
 .chatlistBox{
     margin-block: 16px;
-    max-block-size: 80%;
+    max-block-size: 70%;
     overflow-y: auto;
+    /* background-color: aqua; */
 
     scrollbar-width: none;
 }
 .chatBoxSection{
     padding-inline-start: 8px;
-    /* background-color: antiquewhite; */
+    background-color: antiquewhite;
+    max-block-size: 82%;
+}
+.noChat{
+    /* background-color: rgb(82, 87, 87); */
+    min-block-size: 100%;
+    display: flex;
+    justify-content: center;
+    color: white;
 }

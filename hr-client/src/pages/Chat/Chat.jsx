@@ -1,19 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ChatSIdeBar from '../../components/ChatSideBar/ChatSIdeBar'
 import ChatListItem from '../../components/ChatListItem/ChatListItem'
 import ChatHeader from '../../components/ChatHeader/ChatHeader'
 import './Chat.css'
 import ChatBox from '../../features/ChatBox/ChatBox'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetail } from '../../redux/slices/AuthSlice'
 import socket from '../../config/Socket'
+import { getAllChatsByUser } from '../../redux/slices/ChatSlice'
 
 const Chat = () => {
   const dispatch = useDispatch()
-  const [message, setMessage] = useState("");
+  const [allChat, setAllChat] = useState([])
+
+  const SActiveChat = useSelector((state) => state.currentChat);
+  const SUserProfile = useSelector((state) => state.auth.user);
   const getUser = async () => {
     try {
-    
+
       const data = await dispatch(getUserDetail()).unwrap();
 
       if (!socket || !socket.connected) {
@@ -29,30 +33,42 @@ const Chat = () => {
       console.log(error)
     }
   }
-  const sendMessage = ()=>{
+  const getAllUsers = async () => {
+    try {
+      const { payload } = await dispatch(getAllChatsByUser()).unwrap()
+      if (payload) {
+        setAllChat(payload)
+      }
+    } catch (error) {
+
+    }
+
+  }
+  const sendMessage = (message) => {
     if (message === "") return;
     const Message = {
       me: SUserProfile?._id,
       to: SActiveChat?._id,
       message: {
-        file: {
-          type: UFiles.fileType ? UFiles.fileType : "text",
-          data: UFiles.data ? UFiles.data : "text",
-        },
+
         text: message,
         links: extractLinks(message),
       },
-      replyMessage: {
-        to: props.replyMessage.data?.sender._id,
-        message: props.replyMessage.data?.message,
-      },
+
     };
     socket.emit("sendMessage", Message);
-    setMessage("");
-  }
 
+  }
+  const extractLinks = (text) => {
+    const urlRegex = /https?:\/\/[^\s/$.?#].[^\s]*/g;
+
+    const urls = text.match(urlRegex);
+
+    return urls || [];
+  };
   useEffect(() => {
-    getUser()
+    // getUser()
+    getAllUsers()
   }, [dispatch])
   return (
     <div>
@@ -61,24 +77,17 @@ const Chat = () => {
           <div className='subSection'>
 
             <ChatHeader backgroundColor=' rgb(32, 44, 51)' />
-            <div className='chatlistBox'>
 
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
-              <ChatListItem />
+            <div className='chatlistBox'>
+              {
+                allChat.length ? allChat.map((chat) => <ChatListItem />)
+                  : <div className='noChat' >No chat</div>
+              }
+
             </div>
           </div>
           <div className='chatBoxSection'>
-            <ChatBox />
+            <ChatBox sendMessage={(data) => sendMessage(data)} />
           </div>
         </div>
       </ChatSIdeBar>
