@@ -8,13 +8,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetail } from '../../redux/slices/AuthSlice'
 import socket from '../../config/Socket'
 import { getAllChatsByUser } from '../../redux/slices/ChatSlice'
+import { getAllCandidates } from '../../redux/slices/CandidateManageSlice'
 
 const Chat = () => {
   const dispatch = useDispatch()
   const [allChat, setAllChat] = useState([])
 
   const SActiveChat = useSelector((state) => state.currentChat);
-  const SUserProfile = useSelector((state) => state.auth.user);
+  const SUserProfile = useSelector((state) => state.auth.userInfo);
+  console.log(SUserProfile)
   const getUser = async () => {
     try {
 
@@ -35,6 +37,8 @@ const Chat = () => {
   }
   const getAllUsers = async () => {
     try {
+      const data  = await dispatch(getAllCandidates()).unwrap()
+      console.log(data)
       const { payload } = await dispatch(getAllChatsByUser()).unwrap()
       if (payload) {
         setAllChat(payload)
@@ -56,6 +60,7 @@ const Chat = () => {
       },
 
     };
+    console.log("here",Message)
     socket.emit("sendMessage", Message);
 
   }
@@ -67,7 +72,7 @@ const Chat = () => {
     return urls || [];
   };
   useEffect(() => {
-    // getUser()
+    getUser()
     getAllUsers()
   }, [dispatch])
   return (

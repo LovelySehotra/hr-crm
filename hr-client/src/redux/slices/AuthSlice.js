@@ -41,7 +41,12 @@ const authSlice = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
-            });
+            })
+            .addCase(getUserDetail.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.userInfo = action.payload;
+                localStorage.setItem('userInfo', JSON.stringify(action.payload)); // Save to localStorage
+            })
     }
 })
 export const register = createAsyncThunk("auth/register", async (data, { rejectWithValue }) => {
