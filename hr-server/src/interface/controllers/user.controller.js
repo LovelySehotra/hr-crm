@@ -49,9 +49,9 @@ export class UserController {
 
     })
     getAllChats = catchAsync(async (req, res, next) => {
-        console.log(req.user)
-        const  userId  = req.user._id;
-        const chats = await getAllChatsByUser(userId);
+        // console.log(req.user)
+        // const  userId  = req?.user?._id;
+        const chats = await getAllChatsByUser("67717e9dcb8f79a39768fa6f");
         res.status(200).json(chats)
     })
 

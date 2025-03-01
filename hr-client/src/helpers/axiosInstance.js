@@ -2,14 +2,15 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URI;
 
-export const axiosInstance = axios.create();
-
-axiosInstance.defaults.baseURL = BASE_URL;
-axiosInstance.defaults.withCredentials = true
-axiosInstance.defaults.headers['Content-Type'] = 'application/json';
-
-// let isRefreshing = false;
-// let subscribers = [];
+export const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+console.log("axios")
+// Request Interceptor: Attach Access Token
 axiosInstance.interceptors.request.use((config) => {
   const userInfo = localStorage.getItem("userInfo");
   const accessToken = userInfo ? JSON.parse(userInfo).accessToken : null;
@@ -20,43 +21,51 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor to handle token refresh
+// Response Interceptor: Handle Token Expiry
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response?.statusCode === 401 && !originalRequest._retry) {
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true; 
+
+      // Prevent infinite loop
+      if (originalRequest.url === "/refresh-token") {
+        return Promise.reject(error);
+      }
+
       const refreshToken = getRefreshTokenFromCookie();
+
       if (refreshToken) {
         try {
-          const res = await axiosInstance.post("/refresh-token", { refreshToken });
+          const res = await axios.post(`${BASE_URL}/refresh-token`, { refreshToken });
 
           const newAccessToken = res.data.accessToken;
-          console.log(newAccessToken)
-          const updatedUserInfo = { ...JSON.parse(localStorage.getItem('userInfo')), accessToken: newAccessToken };
+          const updatedUserInfo = { 
+            ...JSON.parse(localStorage.getItem('userInfo')), 
+            accessToken: newAccessToken 
+          };
 
-          // Update the access token in localStorage
           localStorage.setItem("userInfo", JSON.stringify(updatedUserInfo));
 
-          // Retry the original request with the new access token
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           return axiosInstance(originalRequest);
         } catch (refreshError) {
           console.error("Token refresh failed", refreshError);
-          // Handle error: e.g., log out the user or redirect to login
           localStorage.removeItem("userInfo");
-          window.location.href = "/login"; // Redirect to login page
+          window.location.href = "/login";
           return Promise.reject(refreshError);
         }
       } else {
-        window.location.href = "/login"; // Redirect to login page if no refresh token
+        window.location.href = "/login";
       }
     }
     return Promise.reject(error);
   }
 );
-// Helper function to get refresh token from cookies (assuming it's stored in HttpOnly cookie)
+
+// Helper Function: Get Refresh Token
 const getRefreshTokenFromCookie = () => {
   const cookies = document.cookie.split(';');
   for (let cookie of cookies) {

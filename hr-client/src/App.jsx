@@ -96,7 +96,7 @@ function App() {
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
           <Route path='/kanban' element={<KanbanBoard initialData={kanbanData} />} />
-          <Route path='/message' element={<ChatBox initialMessages={[
+          {/* <Route path='/message' element={<ChatBox initialMessages={[
             {
               sender: "John",
               message: "Hello!",
@@ -107,8 +107,8 @@ function App() {
               message: "Hi there!",
               timestamp: "10:05 AM",
             }
-          ]} />} />
-          <Route path='/chat' element={<Chat />} />
+          ]} />} /> */}
+          <Route path='/message' element={<Chat />} />
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />

@@ -12,16 +12,16 @@ import { getAllCandidates } from '../../redux/slices/CandidateManageSlice'
 
 const Chat = () => {
   const dispatch = useDispatch()
-  const [allChat, setAllChat] = useState([])
+  // const [allChat, setAllChat] = useState([])
 
-  const SActiveChat = useSelector((state) => state.currentChat);
+  const SActiveChat = useSelector((state) => state.Chat);
   const SUserProfile = useSelector((state) => state.auth.userInfo);
-  console.log(SUserProfile)
+  console.log("active",SActiveChat)
   const getUser = async () => {
     try {
 
       const data = await dispatch(getUserDetail()).unwrap();
-
+      if(data) console.log(data)
       if (!socket || !socket.connected) {
         console.error("Socket is not connected!");
         return;
@@ -38,7 +38,7 @@ const Chat = () => {
   const getAllUsers = async () => {
     try {
       const data  = await dispatch(getAllCandidates()).unwrap()
-      console.log(data)
+ 
       const { payload } = await dispatch(getAllChatsByUser()).unwrap()
       if (payload) {
         setAllChat(payload)
@@ -52,7 +52,7 @@ const Chat = () => {
     if (message === "") return;
     const Message = {
       me: SUserProfile?._id,
-      to: SActiveChat?._id,
+      to: SActiveChat.currentChat?._id,
       message: {
 
         text: message,
@@ -73,7 +73,8 @@ const Chat = () => {
   };
   useEffect(() => {
     getUser()
-    getAllUsers()
+    dispatch(getAllChatsByUser())
+    // getAllUsers()
   }, [dispatch])
   return (
     <div>
@@ -85,7 +86,7 @@ const Chat = () => {
 
             <div className='chatlistBox'>
               {
-                allChat.length ? allChat.map((chat) => <ChatListItem />)
+               SActiveChat && SActiveChat?.allChats?.chats?.length ? SActiveChat?.allChats?.chats.map((chat) => <ChatListItem name={chat.user.fullName} lastMessage={chat?.message.text} />)
                   : <div className='noChat' >No chat</div>
               }
 
