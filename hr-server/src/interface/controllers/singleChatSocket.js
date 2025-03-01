@@ -1,5 +1,6 @@
 
 import { updateUserById } from "../../application/services/UserService/UserService.js";
+import { ChatModel } from "../../domain/models/ChatModel.js";
 import { User } from "../../domain/models/UserModel.js";
 class singleChatSocket {
   constructor(socket, io) {
@@ -54,11 +55,11 @@ class singleChatSocket {
       const receiver = await User.findById(to);
       const sender = await User.findById(me);
 
-      receiver.allChats = receiver.allChats.filter(chat => chat.toString() !== me);
+      receiver.allChats = receiver.allChats.filter(chat => chat?.toString() !== me);
       receiver.allChats.unshift(me);
       await receiver.save();
 
-      sender.allChats = sender.allChats.filter(chat => chat.toString() !== to);
+      sender.allChats = sender.allChats.filter(chat => chat?.toString() !== to);
       sender.allChats.unshift(to);
       await sender.save();
 
