@@ -1,5 +1,6 @@
 import { login, signup } from "../../application/services/AuthService/AuthService.js";
 import { createAccessToken, decodeToken, exchangeRefreshTokenForAccess } from "../../application/services/AuthService/JwtService.js";
+import { currentChatData } from "../../application/services/ChatService/ChatService.js";
 import { createUserByAdmin, getAllChatsByUser, getAllUsers, getUserById, updateUserById } from "../../application/services/UserService/UserService.js";
 import AppError from "../utils/AppError.js";
 import catchAsync from "../utils/CatchAsync.js";
@@ -54,5 +55,10 @@ export class UserController {
         const chats = await getAllChatsByUser("67717e9dcb8f79a39768fa6f");
         res.status(200).json(chats)
     })
-
+    getCurrentChat =catchAsync(async(req,res,next)=>{
+       
+        const {me,to} = req.query;
+        const chatData = await currentChatData(me,to);
+        res.status(200).json(chatData)
+    })
 }

@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
+import socket from "../../config/Socket";
 
 import "./ChatBox.css";
-const ChatBox = ({sendMessage,messageData=[]}) => {
+import { useSelector } from "react-redux";
+const ChatBox = ({selectedContact,sendMessage}) => {
+
+  const SActiveChat = useSelector((state) => state.Chat);
+  const SUserProfile = useSelector((state) => state.auth.userInfo);
   const [message, setMessage] = useState("");
+  const [messageData,setMessageData] = useState([])
    const handlesendMessage = () => {
     
     sendMessage && sendMessage(message)
   };
 
   useEffect(() => {
-   
-}, []);
+    socket.on("initialMessage", (data) => {
+      console.log("Received messages:", data);
+      setMessageData(data); // Store messages in state
+    });
+
+    return () => {
+      socket.off("initialMessage"); // Cleanup on unmount
+    };
+  }, []);
   return (
     <>
         <div className="chat-box">
@@ -19,12 +32,12 @@ const ChatBox = ({sendMessage,messageData=[]}) => {
             <p  style={{ cursor: "pointer" }}>✖</p>
           </div>
           <div className="chat-box-body">
-            {messageData.map((msg, index) => (
+            {messageData && messageData.map((msg, index) => (
               <div
                 key={index}
                 className={msg.sender === "user" ? "chat-box-body-send" : "chat-box-body-receive"}
               >
-                {msg.text}
+                {msg.message.text}
               </div>
             ))}
           </div>

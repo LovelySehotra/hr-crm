@@ -1,31 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helpers/axiosInstance";
 
-// **Async Thunk to Fetch All Chats**
-export const getAllChatsByUser = createAsyncThunk(
-  "chats/getAllChats",
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await axiosInstance.get("/chat/user-allchat");
-      return res.data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch chats");
-    }
-  }
-);
-
-// **Async Thunk to Fetch Messages of a Chat**
-export const fetchMessages = createAsyncThunk(
-  "chats/fetchMessages",
-  async (chatId, { rejectWithValue }) => {
-    try {
-      const res = await axiosInstance.get(`/chat/messages/${chatId}`);
-      return res.data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch messages");
-    }
-  }
-);
 
 export const chatSlice = createSlice({
   name: "chat",
@@ -58,16 +33,8 @@ export const chatSlice = createSlice({
     setCurrentChat: (state, action) => {
       state.currentChat = action.payload;
     },
-    clearCurrentChat: (state) => {
-      state.currentChat = {
-        _id: "",
-        fullName: "",
-        username: "",
-        isAvatar: "",
-        avatarColor: "",
-        status: "offline",
-        lastSeen: "",
-      };
+    clearCurrentChat: (state,action) => {
+      state.currentChat = action.payload;
     },
     // **Add a new chat to the chat list**
     addChat: (state, action) => {
@@ -116,6 +83,40 @@ export const chatSlice = createSlice({
       });
   },
 });
+// **Async Thunk to Fetch All Chats**
+export const getAllChatsByUser = createAsyncThunk(
+  "chats/getAllChats",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axiosInstance.get("/chat/user-allchat");
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Failed to fetch chats");
+    }
+  }
+);
+
+// **Async Thunk to Fetch Messages of a Chat**
+export const fetchMessages = createAsyncThunk(
+  "chats/fetchMessages",
+  async (chatId, { rejectWithValue }) => {
+    try {
+      const res = await axiosInstance.get(`/chat/messages/${chatId}`);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Failed to fetch messages");
+    }
+  }
+);
+export const getCurrentChatData = createAsyncThunk("chat/currentChatData",async(data, { rejectWithValue })=>{
+  try {
+    const res = await axiosInstance.get(`/chat/current-chat?me=${data.me}&to=${data.to}`);
+    return res.data;
+  } catch (error) {
+    return rejectWithValue(error.response?.data?.message || "Failed to fetch messages");
+  }
+})
+
 
 // **Export Actions**
 export const {

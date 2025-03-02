@@ -10,6 +10,7 @@ class singleChatSocket {
       // @event for handling Chat Message
       this.socket.on("register", this.register.bind(this));
       this.socket.on("disconnect", this.unRegister.bind(this));
+      this.socket.on("selectContact", this.selectContact.bind(this));
       this.socket.on("sendMessage", this.sendMessage.bind(this));
   }
 
@@ -40,7 +41,25 @@ class singleChatSocket {
     //   this.socket.off("selectContact", this.selectContact);
       this.socket.off("register", this.register);
   }
+  async selectContact(data) {
+    const chats = await ChatModel.findOne(
+      {
+        chatWithin: { $all: [data.me, data.to] },
+      },
+      {
+        messages: 1,
+      }
+    ).populate({
+      path: "messages.sender messages.receiver messages.replyMessage.to",
+      select:
+        "fullName username avatarColor isAvatar profile.privacy.profilePhoto",
+      options: { strictPopulate: false },
+    });
 
+    this.io
+      .to(data.socketId)
+      .emit("initialMessage", !chats ? [] : chats.messages);
+  }
   async sendMessage(data) {
     console.log(data);
       const { me, to, message, replyMessage } = data;
