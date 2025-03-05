@@ -17,6 +17,8 @@ import ChatMessage from './components/ChatMessage/ChatMessage'
 import ChatBox from './features/ChatBox/ChatBox'
 import Breadcrumbs from './components/BreadCrumb/BreadCrumb'
 import Chat from './pages/Chat/Chat'
+import ChatList from './features/ChatList/ChatList'
+import ChatSIdeBar from './components/ChatSideBar/ChatSIdeBar'
 
 
 
@@ -95,20 +97,13 @@ function App() {
         {/* <Breadcrumbs /> */}
         <Routes>
           <Route path='/drag' element={<DragDrop />} />
-          <Route path='/kanban' element={<KanbanBoard initialData={kanbanData} />} />
-          {/* <Route path='/message' element={<ChatBox initialMessages={[
-            {
-              sender: "John",
-              message: "Hello!",
-              timestamp: "10:00 AM",
-            },
-            {
-              sender: "Jane",
-              message: "Hi there!",
-              timestamp: "10:05 AM",
-            }
-          ]} />} /> */}
-          <Route path='/message' element={<Chat />} />
+          <Route path='/kanban' element={<KanbanBoard initialData={kanbanData} />} />      
+          <Route path="/message" element={<ChatSIdeBar />}>
+          <Route path="chat" element={<Chat />} />
+          {/* <Route path="status" element={<Status />} />
+          <Route path="channel" element={<Channel />} />
+          <Route path="profile" element={<Profile />} /> */}
+        </Route>
           <Route path='/*' element={
             <ProtectedRoute>
               <Sidebar />
